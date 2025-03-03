@@ -9,6 +9,8 @@ gem 'actionpack', '= 6.1.4'
 
 gem 'activesupport', '= 6.1.4'
 
+gem 'concurrent-ruby', '= 1.3.4'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 6.1.4'
 

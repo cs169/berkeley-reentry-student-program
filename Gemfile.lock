@@ -405,7 +405,7 @@ DEPENDENCIES
   simplecov_json_formatter (~> 0.1.2)
   sprockets (~> 3.7.2)
   sprockets-rails
-  sqlite3
+  sqlite3 (~> 1.4.2)
   timecop
   turbo-rails
   tzinfo-data

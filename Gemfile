@@ -5,8 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 
-gem 'concurrent-ruby', '1.3.4'
-
 gem 'actionpack', '= 6.1.4'
 
 gem 'activesupport', '= 6.1.4'

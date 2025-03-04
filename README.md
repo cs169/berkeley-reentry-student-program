@@ -51,11 +51,15 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
     - **For Windows**: follow [these instructions](https://devcenter.heroku.com/articles/creating-apps) to set environment variables 
       - Set  `ADMINS` & `STAFF`, where the value of each is a comma-separated list of Berkeley email addresses (these do not have to be real); i.e.                 `person@berkeley.edu,person2@berkeley.edu`.
       - Set `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET` to some arbitrary string (these do not need to be valid to run the app locally, since google authentication is stubbed-out unless it is run on production).
-  - **For Production**: Add the above environment variables to Heroku via the command line (assuming there is a Heroku app set up in your directory) 
+  - **For Production**: Add the `ADMIN`, `STAFF`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET` environment variables to Heroku via the command line (assuming there is a Heroku app set up in your directory) 
     - Follow [these instructions](https://developers.google.com/adwords/api/docs/guides/authentication#webapp) (web app) to obtain a google client secret & a google client ID. For the callback URL, use https://*your-app-name*.herokuapp.com/auth/google_oauth2/
-    - Use the command `heroku config:set VARIABLE=value`
+    - Use the command `heroku config:set VARIABLE=value` to set the environment variables.
     - Add `ADMINS` & `STAFF` set to a comma-separated list of verified administrators and staff members for the app. For testing purposes, these variables       can both be set to the string `”none”`
-    - Add `GOOGLE_CLIENT_SECRET` & `GOOGLE_CLIENT_ID` as provided by the instructions above. 
+    - Add `GOOGLE_CLIENT_SECRET` & `GOOGLE_CLIENT_ID` as provided by the instructions above.
+    - **Note**: The environment variables can be manually entered in the Heroku app's Settings under "Config Vars".
+    - Attach "Heroku Postgres" as an add-on to the Heroku app's Resource tab.
+    - Using a terminal, run `heroku run rake db:schema:load` and `heroku run rake db:migrate` to load the database.
+      - **Note**: If you do not have command-line access to run these commands, you can run rake commands directly in the Heroku app's console.
   - In order for the GitHub Actions build to pass, you must add a `CC_TEST_REPORTER_ID` as a repository secret on GitHub. To do this, first sign up for an account with codeclimate.com (quality, not velocity). Then, connect your repository and navigate to repo settings on the CodeClimate dashboard. Finally, copy the `test reporter ID` under the test coverage tab, and add it as a new repository secret under repository settings on GitHub. 
 8. That’s all! The app should now run on your local environment and any Heroku apps created from the codebase. 
 

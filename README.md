@@ -39,12 +39,15 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
     - **For Windows**: 
       - Install PostgreSQL: download installer from [postgresql.org](https://www.postgresql.org/download/windows/)
       - Start PostgreSQL server: `pg_ctl -D "C:\Program Files\PostgreSQL\9.6\data" start`
+    - **For Linux**:
+      - Install PostgreSQL: sudo apt install postgresql postgresql-contrib
+      - Start PostgreSQL server: sudo service postgresql start
 4. Run `bundle install --without production`
 5. Run `rake db:create`, `rake db:schema:load`, and `rake db:migrate`
 6. Follow [these instructions](https://devcenter.heroku.com/articles/creating-apps) to create & setup a new Heroku app on the CLI
 7. Our code requires 4 environment variables to work correctly in production & local environments. 
   - **Local Development**: You must set a non-empty string for the environment variables `ADMIN`, `STAFF`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET`
-    - **For Mac**: With Terminal open, run `open ~/.bash_profile`
+    - **For Mac and Linux**: With Terminal open, run `open ~/.bash_profile`
       - **Note**: If you are using a different shell, add the following exports to the appropriate shell profile e.g. for zsh, run `open ~/.zshrc`
       - At the bottom of the text file, add the following: `export ADMINS=string` & `export STAFF=string` where string is a comma-separated list of Berkeley email addresses (these do not have to be real); i.e. `person@berkeley.edu,person2@berkeley.edu`
       Additionally, add `export GOOGLE_CLIENT_ID=some_value` & `export GOOGLE_CLIENT_SECRET=some_value` where some_value is some arbitrary string (these do not need to be valid to run the app locally, since google authentication is stubbed-out unless it is run on production).

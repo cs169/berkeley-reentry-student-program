@@ -40,8 +40,8 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
       - Install PostgreSQL: download installer from [postgresql.org](https://www.postgresql.org/download/windows/)
       - Start PostgreSQL server: `pg_ctl -D "C:\Program Files\PostgreSQL\9.6\data" start`
     - **For Linux**:
-      - Install PostgreSQL: sudo apt install postgresql postgresql-contrib
-      - Start PostgreSQL server: sudo service postgresql start
+      - Install PostgreSQL: `sudo apt install postgresql postgresql-contrib`
+      - Start PostgreSQL server: `sudo service postgresql start`
 4. Run `bundle install --without production`
 5. Run `rake db:create`, `rake db:schema:load`, and `rake db:migrate`
 6. Follow [these instructions](https://devcenter.heroku.com/articles/creating-apps) to create & setup a new Heroku app on the CLI
@@ -57,7 +57,7 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
   - **For Production**: Add the `ADMIN`, `STAFF`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET` environment variables to Heroku via the command line (assuming there is a Heroku app set up in your directory) 
     - Follow [these instructions](https://developers.google.com/adwords/api/docs/guides/authentication#webapp) (web app) to obtain a google client secret & a google client ID. For the callback URL, use https://*your-app-name*.herokuapp.com/auth/google_oauth2/
     - Use the command `heroku config:set VARIABLE=value` to set the environment variables.
-    - Add `ADMINS` & `STAFF` set to a comma-separated list of verified administrators and staff members for the app. For testing purposes, these variables       can both be set to the string `”none”`
+    - Add `ADMINS` & `STAFF` set to a comma-separated list of verified administrators and staff members for the app. For testing purposes, these variables can both be set to the string `”none”`
     - Add `GOOGLE_CLIENT_SECRET` & `GOOGLE_CLIENT_ID` as provided by the instructions above.
     - **Note**: The environment variables can be manually entered in the Heroku app's Settings under "Config Vars".
     - Attach "Heroku Postgres" as an add-on to the Heroku app's Resource tab.

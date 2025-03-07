@@ -9,6 +9,8 @@ gem 'actionpack', '= 6.1.4'
 
 gem 'activesupport', '= 6.1.4'
 
+gem 'concurrent-ruby', '= 1.3.4'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 6.1.4'
 
@@ -70,7 +72,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'guard-rspec'
   gem 'rspec-rails', '~> 4.1.2'
-  gem 'sqlite3'
+  gem 'sqlite3' #is this ok?
 end
 
 group :development do

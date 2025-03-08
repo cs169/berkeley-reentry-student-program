@@ -54,4 +54,29 @@ describe CheckinController do
       end
     end
   end
+
+  describe 'autofill functionality' do
+    before do
+      @student = FactoryBot.create :student
+      controller.session[:current_user_id] = @student.id
+    end
+
+    context 'when user has no previous check-ins' do
+      it 'sets default reason to Peer Support' do
+        get :new
+        expect(assigns(:default_reason)).to eq('Peer Support')
+      end
+    end
+
+    context 'when user has previous check-ins' do
+      before do
+        Checkin.create!(student: @student, reason: 'Studying', time: Time.current)
+      end
+
+      it 'sets default reason to last used reason' do
+        get :new
+        expect(assigns(:default_reason)).to eq('Studying')
+      end
+    end
+  end
 end

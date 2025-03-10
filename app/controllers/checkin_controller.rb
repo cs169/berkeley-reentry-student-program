@@ -16,14 +16,13 @@ class CheckinController < ApplicationController
     if @checkin.save
       redirect_to root_path, flash: { success: "Success! You've been checked in!" }
     else
-      redirect_to root_path, flash: { error: 'Something went wrong, please try again' }
+      redirect_to root_path, flash: { error: "Something went wrong, please try again" }
     end
   end
 
   private
-
   def require_login
-    redirect_to root_path, flash: { error: 'Please log-in first!' } unless
+    redirect_to root_path, flash: { error: "Please log-in first!" } unless
       session.key?(:current_user_id) && Student.find_by_id(session[:current_user_id])
   end
 end

@@ -6,6 +6,8 @@
 
 <a href="https://codeclimate.com/github/cs169/berkeley-reentry-student-program/test_coverage"><img src="https://api.codeclimate.com/v1/badges/c34db83045f2d3756e29/test_coverage" /></a>
 
+<a href="https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/rubocop.yml"><img src="https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/rubocop.yml/badge.svg" /></a>
+
 <a href="https://codeclimate.com/github/cs169/berkeley-reentry-student-program/maintainability"><img src="https://api.codeclimate.com/v1/badges/c34db83045f2d3756e29/maintainability" /></a>
 
 <a href="https://www.pivotaltracker.com/n/projects/2553425"><img src="https://user-images.githubusercontent.com/67244883/154180887-f803124e-0156-4322-899d-ba475139d60d.png" /></a>

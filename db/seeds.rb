@@ -11,7 +11,7 @@
 r = Random.new
 students = []
 staffs = []
-admin = FactoryBot.create(:admin)
+FactoryBot.create(:admin)
 
 10.times do
   students.push FactoryBot.create(:student)
@@ -22,7 +22,7 @@ end
   staffs.push FactoryBot.create(:staff)
 end
 
-checkin_reasons = ['Peer Support', 'Counseling Appointment', 'Studying', 'OWLs Meeting', 'Other']
+checkin_reasons = ["Peer Support", "Counseling Appointment", "Studying", "OWLs Meeting", "Other"]
 40.times do
   FactoryBot.create(:checkin, reason: checkin_reasons.sample, student: students.sample,
                               time: Time.current + r.rand(-240.hours..0.hours))

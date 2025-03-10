@@ -2,7 +2,7 @@
 
 When(/^(?:|I )click "Submit" in checkin$/) do
   @n_checkin_before = Checkin.all.size
-  click_link_or_button('Submit')
+  click_link_or_button("Submit")
 end
 
 Then(/^no checkin record should be created$/) do

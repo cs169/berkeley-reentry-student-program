@@ -72,7 +72,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'guard-rspec'
   gem 'rspec-rails', '~> 4.1.2'
-  gem 'sqlite3' #is this ok?
+  gem 'sqlite3', '~>1.7.0'#is this ok?
 end
 
 group :development do
@@ -84,8 +84,13 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+end
 
+group :linters do
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :test do

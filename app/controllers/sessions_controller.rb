@@ -3,7 +3,7 @@
 class SessionsController < ApplicationController
   def google_auth
     # Get access tokens from the google server
-    access_token = request.env['omniauth.auth']
+    access_token = request.env["omniauth.auth"]
     existing_user = User.where(email: access_token.info.email).first
     if existing_user.present?
       session[:current_user_id] = existing_user.id
@@ -20,11 +20,11 @@ class SessionsController < ApplicationController
     # set appropriate permissions
     user = set_user_permission(user, access_token.info.email)
     if !user
-      redirect_to root_path, flash: { error: 'Something went wrong, please try again later.' }
+      redirect_to root_path, flash: { error: "Something went wrong, please try again later." }
     elsif user.save
       user_first_login(user)
     else
-      redirect_to root_path, flash: { error: 'Something went wrong, please try again' }
+      redirect_to root_path, flash: { error: "Something went wrong, please try again" }
     end
   end
 
@@ -34,7 +34,6 @@ class SessionsController < ApplicationController
   end
 
   private
-
   def user_first_login(user)
     session[:current_user_id] = user.id
     if user.is_student
@@ -48,8 +47,8 @@ class SessionsController < ApplicationController
 
   def set_user_permission(user, email)
     # Get the official admins
-    admins = ENV['ADMINS'].split(',')
-    staff = ENV['STAFF'].split(',')
+    admins = ENV["ADMINS"].split(",")
+    staff = ENV["STAFF"].split(",")
     return nil if admins.blank? || staff.blank?
 
     user.is_admin = admins.include? email

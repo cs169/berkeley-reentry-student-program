@@ -11,6 +11,6 @@ class Checkin < ApplicationRecord
   end
 
   def self.reasons
-    ['Peer Support', 'Counseling Appointment', 'Studying', 'OWLs Meeting', 'Other']
+    ["Peer Support", "Counseling Appointment", "Studying", "OWLs Meeting", "Other"]
   end
 end

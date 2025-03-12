@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe AppointmentsController, type: :controller do
     describe "GET #advisors" do
@@ -7,7 +7,7 @@ RSpec.describe AppointmentsController, type: :controller do
           get :advisors
           expect(response).to redirect_to(root_path)
         end
-        
+
         it "sets a flash error message" do
           get :advisors
           expect(flash[:error]).to be_present

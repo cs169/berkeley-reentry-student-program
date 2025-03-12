@@ -1,4 +1,6 @@
-﻿# frozen_string_literal: true
+# frozen_string_literal: true
+
+﻿ # frozen_string_literal: true
 
 class PodcastsController < ApplicationController
   before_action :require_login

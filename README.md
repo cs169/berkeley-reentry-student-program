@@ -64,6 +64,7 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
 
 ## RuboCop
 
+RuboCop is a Ruby code style checker (linter) and formatter.
 1. You can run `rubocop -a` to make safe fixes and `rubocop -A` to make unsafe auto-refactors.
 2. You can also run `rubocop --auto-gen-config` to configure some finer settings.
 

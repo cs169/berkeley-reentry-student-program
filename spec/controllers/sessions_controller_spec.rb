@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 ADMIN_CREDENTIALS = {
-  "provider" => 'google_oauth2',
-  "uid" =>      '1000000000',
+  "provider" => "google_oauth2",
+  "uid" =>      "1000000000",
   "info" =>     {
-    "name" =>       'Google Admin Developer',
-    "email" =>      'google_admin@berkeley.edu',
-    "first_name" => 'Google',
-    "last_name" =>  'Admin Developer'
+    "name" =>       "Google Admin Developer",
+    "email" =>      "google_admin@berkeley.edu",
+    "first_name" => "Google",
+    "last_name" =>  "Admin Developer"
   },
   "credentials" => {
     "token" => "credentials_token_1234567",
@@ -19,18 +19,18 @@ ADMIN_CREDENTIALS = {
 
 describe SessionsController do
   before(:each) do
-    stub_const('ENV', {'ADMINS' => 'google_admin@berkeley.edu', 'STAFF' => 'google_staff@berkeley.edu'})
+    stub_const("ENV", { "ADMINS" => "google_admin@berkeley.edu", "STAFF" => "google_staff@berkeley.edu" })
   end
   describe "google authentication" do
     it "should create a new user" do
       user_len = User.all.size
-      request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
       get :google_auth
       expect(User.all.size).to be user_len + 1
     end
   end
-  describe 'logout' do
-    it 'should delete session key' do
+  describe "logout" do
+    it "should delete session key" do
       user = FactoryBot.create(:user)
       controller.session[:current_user_id] = user.id
       get :google_auth_logout
@@ -49,7 +49,7 @@ describe SessionsController do
       expect(Admin.all.size).to be admin_len + 1
     end
     it "should recover on empty admins" do
-      stub_const('ENV', {'ADMINS' => '', 'STAFF' => 'google_staff@berkeley.edu'})
+      stub_const("ENV", { "ADMINS" => "", "STAFF" => "google_staff@berkeley.edu" })
       OmniAuth.config.add_mock(
         :google_oauth2,
         ADMIN_CREDENTIALS

@@ -4,6 +4,8 @@
 
 ![build](https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/main.yml/badge.svg)
 
+<a href="https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/rubocop.yml/badge.svg"><img src="https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/rubocop.yml"/></a>
+
 <a href="https://codeclimate.com/github/cs169/berkeley-reentry-student-program/test_coverage"><img src="https://api.codeclimate.com/v1/badges/c34db83045f2d3756e29/test_coverage" /></a>
 
 <a href="https://codeclimate.com/github/cs169/berkeley-reentry-student-program/maintainability"><img src="https://api.codeclimate.com/v1/badges/c34db83045f2d3756e29/maintainability" /></a>

@@ -60,7 +60,13 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
     - Using a terminal, run `heroku run rake db:schema:load` and `heroku run rake db:migrate` to load the database.
       - **Note**: If you do not have command-line access to run these commands, you can run rake commands directly in the Heroku app's console.
   - In order for the GitHub Actions build to pass, you must add a `CC_TEST_REPORTER_ID` as a repository secret on GitHub. To do this, first sign up for an account with codeclimate.com (quality, not velocity). Then, connect your repository and navigate to repo settings on the CodeClimate dashboard. Finally, copy the `test reporter ID` under the test coverage tab, and add it as a new repository secret under repository settings on GitHub. 
-8. That’s all! The app should now run on your local environment and any Heroku apps created from the codebase. 
+8. That’s all! The app should now run on your local environment and any Heroku apps created from the codebase.
+
+## RuboCop
+
+RuboCop is a Ruby code style checker (linter) and formatter.
+1. You can run `rubocop -a` to make safe fixes and `rubocop -A` to make unsafe auto-refactors.
+2. You can also run `rubocop --auto-gen-config` to configure some finer settings.
 
 ## Credit
 Spring 2025

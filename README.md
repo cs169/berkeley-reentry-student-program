@@ -1,16 +1,10 @@
 # Berkeley ReEntry Student Program
 
-[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_04-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-23-GH-cs169_berkeley-reentry-student-program/main)
-
-![build](https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/main.yml/badge.svg)
-
-<a href="https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/rubocop.yml/badge.svg"><img src="https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/rubocop.yml"/></a>
-
-<a href="https://codeclimate.com/github/cs169/berkeley-reentry-student-program/test_coverage"><img src="https://api.codeclimate.com/v1/badges/c34db83045f2d3756e29/test_coverage" /></a>
-
-<a href="https://codeclimate.com/github/cs169/berkeley-reentry-student-program/maintainability"><img src="https://api.codeclimate.com/v1/badges/c34db83045f2d3756e29/maintainability" /></a>
-
-<a href="https://www.pivotaltracker.com/n/projects/2553425"><img src="https://user-images.githubusercontent.com/67244883/154180887-f803124e-0156-4322-899d-ba475139d60d.png" /></a>
+[![build](https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/main.yml/badge.svg)](https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/main.yml)
+[![rubocop](https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/rubocop.yml/badge.svg)](https://github.com/cs169/berkeley-reentry-student-program/actions/workflows/rubocop.yml)
+[![test coverage](https://api.codeclimate.com/v1/badges/c34db83045f2d3756e29/test_coverage)](https://codeclimate.com/github/cs169/berkeley-reentry-student-program/test_coverage)
+[![maintainability](https://api.codeclimate.com/v1/badges/c34db83045f2d3756e29/maintainability)](https://codeclimate.com/github/cs169/berkeley-reentry-student-program/maintainability)
+[![pivotal tracker](https://user-images.githubusercontent.com/67244883/154180887-f803124e-0156-4322-899d-ba475139d60d.png)](https://www.pivotaltracker.com/n/projects/2553425)
 
 ## Description
 The Berkeley ReEntry Student Program is an application developed by UC Berkeley's CS169L students for the ReEntry Program at UC Berkeley. The application provides an easy-to-use interface for ReEntry students to sign-up for and use resources provided by UC Berkeley's ReEntry program.

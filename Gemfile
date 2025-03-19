@@ -5,14 +5,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.7"
 
-gem "actionpack", "= 6.1.7.10"
+gem "actionpack", "= 7.0.0"
 
-gem "activesupport", "= 6.1.7.10"
+gem "activesupport", "= 7.0.0"
 
 gem "concurrent-ruby", "= 1.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 6.1.7.10"
+gem "rails", "~> 7.0.0"
 
 gem "pg"
 
@@ -99,8 +99,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", "~> 3.0"
-  gem "cucumber", "~> 3.0.0"
-  gem "cucumber-rails", "~> 1.7.0", require: false
+  gem "cucumber", "~> 3.2.0"
+  gem "cucumber-rails", "~> 2.6.1", require: false
   gem "cucumber-rails-training-wheels" # basic imperative step defs like "Then I should see..."
   gem "database_cleaner", "~> 1.8.5" # required by Cucumber
   gem "rails-controller-testing"

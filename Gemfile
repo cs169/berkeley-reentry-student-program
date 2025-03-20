@@ -7,7 +7,7 @@ ruby "3.2.7"
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.8"
+gem "rails", "~> 7.0.8.7"
 
 gem "pg"
 

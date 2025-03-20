@@ -7,7 +7,7 @@ ruby "3.2.7"
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.8.7"
+gem "rails", "~> 7.1.1"
 
 gem "pg"
 
@@ -98,7 +98,7 @@ group :test do
   gem "cucumber-rails", "~> 2.6.1", require: false
   gem "cucumber-rails-training-wheels" # basic imperative step defs like "Then I should see..."
   gem "database_cleaner", "~> 1.8.5" # required by Cucumber
-  gem "rails-controller-testing"
+  gem 'rails-controller-testing', github: 'rails/rails-controller-testing'
   gem "selenium-webdriver"
   gem "simplecov", "~> 0.22.0", require: false
   gem "simplecov-html", "~> 0.13.1", require: false

@@ -5,14 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.7"
 
-gem "actionpack", "= 7.0.0"
-
-gem "activesupport", "= 7.0.0"
-
-gem "concurrent-ruby", "= 1.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.0"
+gem "rails", "~> 7.0.8"
 
 gem "pg"
 
@@ -80,7 +75,7 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console", "~> 3.7.0"
+  gem "web-console", "~> 4.2.0"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -105,8 +100,10 @@ group :test do
   gem "database_cleaner", "~> 1.8.5" # required by Cucumber
   gem "rails-controller-testing"
   gem "selenium-webdriver"
-  gem "simplecov", "~> 0.21.2", require: false
-  gem "simplecov_json_formatter", "~> 0.1.2", require: false
+  gem "simplecov", "~> 0.22.0", require: false
+  gem "simplecov-html", "~> 0.13.1", require: false
+  gem "simplecov_json_formatter", "~> 0.1.4", require: false
+  gem "docile", "~> 1.4", ">= 1.4.1", require: false
   gem "timecop"
   gem "webdrivers"
 end

@@ -2,13 +2,20 @@
 
 class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true
-  encrypts :google_token, :google_refresh_token, :canvas_token, :canvas_refresh_token
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |user|
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.email = auth.info.email
+    end
+  end
+
+  def self.from_canvas(user_data)
+    where(email: user_data["email"]).first_or_initialize do |user|
+      user.first_name = user_data["first_name"]
+      user.last_name = user_data["last_name"]
+      user.email = user_data["email"]
     end
   end
 

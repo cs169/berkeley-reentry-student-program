@@ -38,11 +38,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       }
     )
   end
-  # provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
-  provider :canvas, ENV["CANVAS_CLIENT_ID"], ENV["CANVAS_CLIENT_SECRET"], client_options: {
-    site: "https://ucberkeleysandbox.instructure.com",
-    authorize_url: "/login/oauth2/auth",
-    token_url: "/login/oauth2/token"
-  }
+  provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
 end
 OmniAuth.config.allowed_request_methods = %i[post]

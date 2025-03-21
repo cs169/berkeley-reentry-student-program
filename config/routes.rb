@@ -25,8 +25,13 @@ Rails.application.routes.draw do
   patch "user/profile/update", to: "users#profile_update", as: "user_profile_update"
   get "user/profile/edit", to: "users#profile_edit", as: "user_profile_edit"
   # Routes for Google authentication
-  get "auth/google_oauth2/callback", to: "sessions#google_auth", as: "google_login"
-  get "auth/failure", to: redirect("/")
-  get "logout", to: "sessions#google_auth_logout"
-  get "login/confirm", to: "login#confirm"
+  # get "auth/google_oauth2/callback", to: "sessions#google_auth", as: "google_login"
+  # get "auth/failure", to: redirect("/")
+  # get "logout", to: "sessions#google_auth_logout"
+  # get "login/confirm", to: "login#confirm"
+
+  # Routes for Canvas authentication
+get "auth/canvas/callback", to: "sessions#canvas_auth", as: "canvas_login"
+get "auth/failure", to: redirect("/")
+get "logout", to: "sessions#canvas_auth_logout"
 end

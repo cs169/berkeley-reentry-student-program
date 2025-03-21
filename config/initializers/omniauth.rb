@@ -20,7 +20,31 @@ Rails.application.config.middleware.use OmniAuth::Builder do
         }
       }
     )
+    OmniAuth.config.add_mock(
+      :canvas,
+      {
+        "provider" => "canvas",
+        "uid" => "1000000000",
+        "info" => {
+          "name" => "Canvas Test Developer",
+          "email" => "canvas_student@berkeley.edu",
+          "first_name" => "Canvas",
+          "last_name" => "Test Developer"
+        },
+        "credentials" => {
+          "token" => "credentials_token_1234567",
+          "refresh_token" => "credentials_refresh_token_45678"
+        }
+      }
+    )
   end
-  provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
+  # provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
+  provider :canvas, ENV["CANVAS_CLIENT_ID"], ENV["CANVAS_CLIENT_SECRET"], client_options: {
+    site: "https://bcourses.berkeley.edu",
+    authorize_url: "/login/oauth2/auth",
+    token_url: "/login/oauth2/token"
+  }
+
+
 end
 OmniAuth.config.allowed_request_methods = %i[post]

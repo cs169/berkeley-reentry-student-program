@@ -56,4 +56,28 @@ class SessionsController < ApplicationController
     user.is_student = !user.is_admin && !user.is_staff
     user
   end
+
+  def canvas_auth
+    access_token = request.env["omniauth.auth"]
+    existing_user = User.where(email: access_token.info.email).first
+    if existing_user.present?
+      session[:current_user_id] = existing_user.id
+      redirect_to root_path, flash: { success: "Success! You've been logged-in!" }
+      return
+    end
+    user = User.from_omniauth(access_token)
+    user.canvas_token = access_token.credentials.token
+    user.canvas_refresh_token = access_token.credentials.refresh_token if access_token.credentials.refresh_token.present?
+    user = set_user_permission(user, access_token.info.email)
+    if user.save
+      user_first_login(user)
+    else
+      redirect_to root_path, flash: { error: "Something went wrong, please try again." }
+    end
+  end
+
+  def canvas_auth_logout
+    session.delete(:current_user_id)
+    redirect_to root_path, flash: { success: "You've been successfully logged-out!" }
+  end
 end

@@ -57,7 +57,7 @@ class SessionsController < ApplicationController
     user
   end
 
-  def canvas_auth
+  def canvas_callback
     if params[:error].present? || params[:code].blank?
       redirect_to root_path, alert: "Authentication failed. Please try again."
       return

@@ -14,6 +14,6 @@ class LoginController < ApplicationController
       scope: "url:GET|/api/v1/users/self"
     }
 
-    redirect_to ENV["CANVAS_URL"] + "/login/oauth2/auth?#{params.to_query}", allow_other_host: true
+    redirect_to "#{ENV["CANVAS_URL"]}/login/oauth2/auth?#{params.to_query}"
   end
 end

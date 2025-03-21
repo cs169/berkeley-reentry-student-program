@@ -96,7 +96,7 @@ class SessionsController < ApplicationController
       site: ENV["CANVAS_URL"],
       token_url: "/login/oauth2/token"
     )
-    client.auth_code.get_token(code, redirect_uri: :canvas_auth)
+    client.auth_code.get_token(code, redirect_uri: :canvas_callback)
   end
 
   def canvas_auth_logout

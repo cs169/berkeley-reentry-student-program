@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   # Routes for Canvas authentication
   get "login/canvas", to: "login#canvas_login", as: "canvas_login"
-  match "auth/canvas/callback", to: "sessions#canvas_auth", as: "canvas_auth", via: [:get, :post]
+  match "auth/canvas/callback", to: "sessions#canvas_auth", as: "canvas_callback", via: [:get, :post]
   get "auth/failure", to: redirect("/")
   get "logout", to: "sessions#canvas_auth_logout"
 end

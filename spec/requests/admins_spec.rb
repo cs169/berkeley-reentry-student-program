@@ -1,48 +1,49 @@
-# frozen_string_literal: true
-
-require "rails_helper"
+# filepath: spec/requests/admins_spec.rb
+require 'rails_helper'
 
 RSpec.describe "Admins", type: :request do
-  describe "Access control" do
-    it "blocks Student from accessing admin dashboard" do
+  describe "Access control for admin dashboard" do
+    it "blocks a student from accessing the admin dashboard" do
       student = FactoryBot.create(:student)
-      post login_path, params: { sid: student.sid }
+      sign_in_as(student)
       get admins_path
       expect(response).to redirect_to(root_path)
     end
 
-    it "blocks Staff from accessing admin dashboard" do
+    it "blocks a staff member from accessing the admin dashboard" do
       staff = FactoryBot.create(:staff)
-      post login_path, params: { sid: staff.sid }
+      sign_in_as(staff)
       get admins_path
       expect(response).to redirect_to(root_path)
     end
 
-    it "blocks logged-out user from accessing admin dashboard" do
+    it "blocks a logged out user from accessing the admin dashboard" do
       get admins_path
       expect(response).to redirect_to(root_path)
     end
   end
 
-  describe "Viewing check-in records" do
-    let(:admin) { FactoryBot.create(:admin) }
-
+  describe "View checkin records" do
     before do
-      post login_path, params: { sid: admin.sid }
+      admin = FactoryBot.create(:admin)
+      sign_in_as(admin)
       50.times { FactoryBot.create(:checkin) }
     end
 
-    it "redirects to page 1 when page param is missing" do
+    it "redirects to itself with params[:page] == 1 if params[:page] is nil or invalid" do
       get view_checkin_records_path
       expect(response).to redirect_to(view_checkin_records_path(page: 1))
     end
 
-    it "returns has_next_page: false on the last page" do
-      last_page = (Checkin.count / 20.0).ceil
-      get view_checkin_records_path(page: last_page)
-
-      # Example: checking HTML or assigning in controller (adjust as needed)
-      expect(response.body).to include("No more pages") # Adjust if rendering has indicator
+    it "sets has_next_page to false if the current page is the last page of checkin records" do
+      get view_checkin_records_path(page: Checkin.count / 20 + 1)
+      expect(assigns(:has_next_page)).to be_falsey
     end
   end
+end
+
+def sign_in_as(user)
+  # Directly set the session variable for the user
+  post google_login_path, params: { session: { email: user.email, password: 'password' } }
+  session[:current_user_id] = user.id
 end

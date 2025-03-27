@@ -29,4 +29,8 @@ Rails.application.routes.draw do
   get "auth/failure", to: redirect("/")
   get "logout", to: "sessions#google_auth_logout"
   get "login/confirm", to: "login#confirm"
+
+  # Routes for Canvas authentication
+  post "login/canvas", to: "login#canvas_login", as: "canvas_login"
+  get "auth/canvas/callback", to: "sessions#canvas_callback", as: "canvas_callback"
 end

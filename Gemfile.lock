@@ -459,7 +459,9 @@ DEPENDENCIES
   guard-rspec
   jbuilder (~> 2.10.1)
   newrelic_rpm
+  omniauth
   omniauth-google-oauth2
+  omniauth-oauth2
   omniauth-rails_csrf_protection
   pg
   puma (~> 5.0)

@@ -60,7 +60,8 @@ class SessionsController < ApplicationController
     # user.canvas_refresh_token = access_token.credentials.refresh_token if access_token.credentials.refresh_token.present?
     user = set_user_permission(user, user_data["email"])
     if user.save
-      user_first_login(user)
+      session[:current_user_id] = user.id
+      redirect_to root_path, flash: { success: "Success! You've been logged-in!" }
     else
       redirect_to root_path, flash: { error: "Something went wrong, please try again." }
     end

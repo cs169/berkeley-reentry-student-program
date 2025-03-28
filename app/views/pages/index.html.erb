@@ -33,12 +33,10 @@
         <% if @logged_out %>
         <h1 class="display-5 fw-bold">Welcome to the Berkeley <br /> Re-entry Student Program</h1>
         <div class="d-grid mt-2 gap-2 d-sm-flex justify-content-sm-center pt-2">
-            <!--
             <%= button_to '/auth/google_oauth2', class: "btn btn-primary btn-lg" do %>
             <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg" />
             Login with Google
             <% end %>
-            -->
             <%= button_to canvas_login_path, class: "btn btn-primary btn-lg" do %>
             <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Canvas sign-in" src="https://www.instructure.com/sites/default/files/image/2021-12/Canvas_logo_single_mark.png" />
             Login with Canvas

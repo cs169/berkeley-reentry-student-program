@@ -1,7 +1,8 @@
-# filepath: spec/requests/admins_spec.rb
+# spec/requests/admins_spec.rb
 require 'rails_helper'
 
 RSpec.describe "Admins", type: :request do
+
   describe "Access control for admin dashboard" do
     it "blocks a student from accessing the admin dashboard" do
       student = FactoryBot.create(:student)
@@ -40,10 +41,4 @@ RSpec.describe "Admins", type: :request do
       expect(assigns(:has_next_page)).to be_falsey
     end
   end
-end
-
-def sign_in_as(user)
-  # Directly set the session variable for the user
-  post google_login_path, params: { session: { email: user.email, password: 'password' } }
-  session[:current_user_id] = user.id
 end

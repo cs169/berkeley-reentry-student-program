@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "webmock/cucumber"
 require "simplecov"
 require "simplecov_json_formatter"
 SimpleCov.start "rails"
@@ -66,3 +67,11 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 World(FactoryBot::Syntax::Methods)
+
+Before do
+  stub_request(:get, %r{#{ENV['CANVAS_URL']}/login/oauth2/auth})
+    .to_return(
+      status: 302,
+      headers: { "Location" => "/auth/canvas/callback?code=test_code" }
+    )
+end

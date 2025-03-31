@@ -7,6 +7,10 @@ class LoginController < ApplicationController
   end
 
   def canvas_login
+    unless ENV["CANVAS_CLIENT_ID"] && ENV["CANVAS_URL"] && ENV["CANVAS_REDIRECT_URI"]
+      redirect_to root_path, flash: { error: "Canvas configuration is missing" }
+      return
+    end
     params = {
       client_id: ENV["CANVAS_CLIENT_ID"],
       response_type: "code",

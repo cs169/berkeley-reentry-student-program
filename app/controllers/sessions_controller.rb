@@ -56,7 +56,7 @@ class SessionsController < ApplicationController
       end
     end
     user = User.from_canvas(user_data)
-    user.canvas_token = access_token.token
+    # user.canvas_token = access_token.token
     # user.canvas_refresh_token = access_token.credentials.refresh_token if access_token.credentials.refresh_token.present?
     user = set_user_permission(user, user_data["email"])
     if user.save

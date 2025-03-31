@@ -113,4 +113,5 @@ group :test do
   gem "simplecov_json_formatter", "~> 0.1.2", require: false
   gem "timecop"
   gem "webdrivers"
+  gem "webmock"
 end

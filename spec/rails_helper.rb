@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "webmock/rspec"
 # require 'simplecov'
 # SimpleCov.start
 # This file is copied to spec/ when you run 'rails generate rspec:install'
@@ -67,4 +68,7 @@ RSpec.configure do |config|
 
   # setup for factory bot
   config.include FactoryBot::Syntax::Methods
+  config.before(:each, type: :controller) do
+    @request.env["HTTPS"] = "on"
+  end
 end

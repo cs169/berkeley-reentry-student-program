@@ -33,6 +33,57 @@ class SessionsController < ApplicationController
     redirect_to root_path, flash: { success: "You've been successfully logged-out!" }
   end
 
+  # Canvas authentication
+  def canvas_callback
+    if params[:error].present? || params[:code].blank?
+      redirect_to root_path, alert: "Authentication failed. Please try again."
+      return
+    end
+
+    access_token = get_access_token(params[:code])
+
+    response = Faraday.get("#{ENV["CANVAS_URL"]}/api/v1/users/self?") do |req|
+      req.headers["Authorization"] = "Bearer #{access_token.token}"
+    end
+
+    if response.success?
+      user_data = JSON.parse(response.body)
+      existing_user = User.where(email: user_data["email"]).first
+      if existing_user.present?
+        session[:current_user_id] = existing_user.id
+        redirect_to root_path, flash: { success: "Success! You've been logged-in!" }
+        return
+      end
+    end
+    user = User.from_canvas(user_data)
+    # user.canvas_token = access_token.token
+    # user.canvas_refresh_token = access_token.credentials.refresh_token if access_token.credentials.refresh_token.present?
+    user = set_user_permission(user, user_data["email"])
+    if user.save
+      session[:current_user_id] = user.id
+      redirect_to root_path, flash: { success: "Success! You've been logged-in!" }
+    else
+      redirect_to root_path, flash: { error: "Something went wrong, please try again." }
+    end
+  end
+
+  def get_access_token(code)
+    client = OAuth2::Client.new(
+      ENV["CANVAS_CLIENT_ID"],
+      ENV["CANVAS_CLIENT_SECRET"],
+      site: ENV["CANVAS_URL"],
+      token_url: "/login/oauth2/token"
+    )
+    client.auth_code.get_token(code, redirect_uri: :canvas_callback)
+  end
+
+  def canvas_auth_logout
+    session.delete(:current_user_id)
+    redirect_to root_path, flash: { success: "You've been successfully logged-out!" }
+  end
+
+
+
   private
   def user_first_login(user)
     session[:current_user_id] = user.id

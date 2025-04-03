@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "pages#index"
   # route GET /check-in to login controller and #index action
-  get "checkin", to: "checkin#new"
-  post "checkin", to: "checkin#create"
+  get "checkin", to: "checkin#new", as: "new_checkin"
+  post "checkin", to: "checkin#create", as: "checkin"
   # appointments page
   get "appointments", to: "appointments#advisors"
   # scholarships page

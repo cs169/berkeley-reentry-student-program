@@ -1,8 +1,8 @@
-# spec/requests/checkins_spec.rb
+# spec/requests/checkin_spec.rb
 
 require "rails_helper"
 
-RSpec.describe "Checkins", type: :request do
+RSpec.describe "Checkin", type: :request do
 
   let(:student)        { FactoryBot.create(:student) }
   let(:expected_time)  { DateTime.parse("2022-03-08T12:00:00-08:00") }
@@ -15,7 +15,7 @@ RSpec.describe "Checkins", type: :request do
     Timecop.return
   end
 
-  describe "POST /checkins" do
+  describe "POST /checkin" do
     context "when user is logged in" do
       before do
         sign_in_as(student)
@@ -24,7 +24,7 @@ RSpec.describe "Checkins", type: :request do
 
       context "happy path" do
         before do
-          post checkins_path, params: { checkin: { reason: "Studying" } }
+          post checkin_path, params: { checkin: { reason: "Studying" } }
           @new_checkin = Checkin.order(id: :desc).first
         end
 
@@ -48,7 +48,7 @@ RSpec.describe "Checkins", type: :request do
 
       context "sad path" do
         it "redirects to root if the record is invalid" do
-          post checkins_path, params: { checkin: { reason: nil } }
+          post checkin_path, params: { checkin: { reason: nil } }
           expect(response).to redirect_to(root_path)
           expect(flash[:error]).to match(/Something went wrong, please try again/)
         end
@@ -57,13 +57,13 @@ RSpec.describe "Checkins", type: :request do
 
     context "when user is not logged in" do
       it "redirects to the root path" do
-        post checkins_path, params: { checkin: { reason: "Studying" } }
+        post checkin_path, params: { checkin: { reason: "Studying" } }
         expect(response).to redirect_to(root_path)
       end
     end
   end
 
-  describe "GET /checkins/new (autofill functionality)" do
+  describe "GET /checkin/new (autofill functionality)" do
     context "when user has no previous check-ins" do
       before do
         sign_in_as(student)

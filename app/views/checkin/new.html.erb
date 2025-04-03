@@ -1,6 +1,7 @@
+<html lang="en">
 <nav class="navbar navbar-expand-sm navbar-light berkeley-color">
   <div class="container">
-    <%= link_to "Home", root_path, method: :get, class: "btn btn-outline-primary", style: "color: grey; border-color: grey;"%>
+    <%= link_to "Home", root_path, method: :get, class: "btn btn-outline-primary", style: "color: darkgray; border-color: darkgray;"%>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-label="Expand Navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,13 +11,13 @@
           <%= link_to "Check In".html_safe, '#', method: :get, class: "nav-link", style:"color: white;"%>
         </li>
         <li class="nav-item">
-          <%= link_to "Make Appointments".html_safe, appointments_path, class: "nav-link", style:"color: grey;"%>
+          <%= link_to "Make Appointments".html_safe, appointments_path, class: "nav-link", style:"color: darkgray;"%>
         </li>
         <li class="nav-item">
-          <%= link_to "Scholarships".html_safe, scholarships_path, class: "nav-link", style:"color: grey;"%>
+          <%= link_to "Scholarships".html_safe, scholarships_path, class: "nav-link", style:"color: darkgray;"%>
         </li>
         <li class="nav-item">
-          <%= link_to "Courses".html_safe, courses_path, class: "nav-link", style:"color: grey;"%>
+          <%= link_to "Courses".html_safe, courses_path, class: "nav-link", style:"color: darkgray;"%>
         </li>
       </ul>
     </div>
@@ -24,7 +25,7 @@
 </nav>
 <div class="container">
   <div class="px-4 py-3 my-5 text-center">
-    <h2 class="display-5 fw-bold pb-4" style="color: #003262;">Check-in to the <br> Berkeley RSP <br> Community Space</h2>
+    <h1 class="display-5 fw-bold pb-4" style="color: #003262;">Check-in to the <br> Berkeley RSP <br> Community Space</h2>
     <%= form_with model: @checkin, url: checkin_path, local: true do |f| %>
       <div class="row mb-3 justify-content-center">
         <div class="col-7 mb-5">
@@ -46,3 +47,4 @@
     <% end %>
   </div>
 </div>
+</html>

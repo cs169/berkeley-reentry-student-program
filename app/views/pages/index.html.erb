@@ -1,3 +1,4 @@
+<html lang="en">
 <script src="https://kit.fontawesome.com/ef4c7bf5f9.js" crossorigin="anonymous"></script>
 <a id="skip-link"></a>
 <nav class="navbar navbar-expand-sm navbar-light berkeley-color">
@@ -9,16 +10,16 @@
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <%= link_to "Check In".html_safe, checkin_path, class: "nav-link", style:"color: grey;"%>
+          <%= link_to "Check In".html_safe, checkin_path, class: "nav-link", style:"color: darkgray;"%>
         </li>
         <li class="nav-item">
-          <%= link_to "Make Appointments".html_safe, appointments_path, class: "nav-link", style:"color: grey;"%>
+          <%= link_to "Make Appointments".html_safe, appointments_path, class: "nav-link", style:"color: darkgray;"%>
         </li>
         <li class="nav-item">
-          <%= link_to "Scholarships".html_safe, scholarships_path, class: "nav-link", style:"color: grey;"%>
+          <%= link_to "Scholarships".html_safe, scholarships_path, class: "nav-link", style:"color: darkgray;"%>
         </li>
         <li class="nav-item">
-          <%= link_to "Courses".html_safe, courses_path, class: "nav-link", style:"color: grey;"%>
+          <%= link_to "Courses".html_safe, courses_path, class: "nav-link", style:"color: darkgray;"%>
         </li>
       </ul>
     </div>
@@ -28,18 +29,22 @@
 <div class="container">
     <div class="<%=flash.empty? ? 'px-4 py-5 my-2 text-center' : 'px-4 pb-5 mb-5 text-center' %>">
         <%= render "shared/flash_messages" %>
-        <%= image_tag("new_logo.png", width: 300, height: 130, class: "d-block rounded mx-auto mb-4") %>
+        <%= image_tag("new_logo.png", width: 300, height: 130, class: "d-block rounded mx-auto mb-4", alt: "re-entry student program logo") %>
         <% if @logged_out %>
         <h1 class="display-5 fw-bold">Welcome to the Berkeley <br /> Re-entry Student Program</h1>
         <div class="d-grid mt-2 gap-2 d-sm-flex justify-content-sm-center pt-2">
             <%= button_to '/auth/google_oauth2', class: "btn btn-primary btn-lg" do %>
-            <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg" />
             Login with Google
+            <% end %>
+            <%= button_to canvas_login_path, class: "btn btn-primary btn-lg" do %>
+            <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Canvas sign-in" src="https://www.instructure.com/sites/default/files/image/2021-12/Canvas_logo_single_mark.png" />
+            Login with Canvas
             <% end %>
         </div>
         <% else %>
         <h1 class="display-5 fw-bold">Welcome to the Berkeley <br /> Re-entry Student Program,</h1>
-        <h3 class="display-5 name-display mt-3" style="color: #003262;"><%= sanitize @name %></h3>
+        <h2 class="display-5 name-display mt-3" style="color: #003262;"><%= sanitize @name %></h3>
         <% if @user_type.include? 'Admin' %>
         <%= link_to "Go to admin dashboard".html_safe, admins_path, class: "btn btn-primary mt-1 btn-lg px-4 gap-3" %>
         <% elsif @user_type.include? 'Staff' %>
@@ -137,3 +142,4 @@
                 </div>
             </footer>
         </div>
+</html>

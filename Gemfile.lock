@@ -159,9 +159,14 @@ GEM
       logger
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
+<<<<<<< HEAD
     ffi (1.17.1-arm64-darwin)
     ffi (1.17.1-x86_64-darwin)
     ffi (1.17.1-x86_64-linux-gnu)
+=======
+    ffi (1.17.1)
+    ffi (1.17.1-arm64-darwin)
+>>>>>>> a54403b (added the axe core gems for accessibility testing, made new feature files to do cucumber testing for accessibility, modified html and css according to accessibility standards)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     formatador (1.1.0)

@@ -38,4 +38,3 @@ Feature: Accessibility Testing
   Scenario: Check view checkin records page accessibility
     Given I am on the view_checkin_records page
     Then the page should be axe clean
-.

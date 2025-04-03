@@ -1,11 +1,10 @@
-require:
+plugins:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
 
 AllCops:
-  # TODO: rubocop needs to be updated for 3.2
-  TargetRubyVersion: 3.0.3
+  TargetRubyVersion: 3.2
   # RuboCop has a bunch of cops enabled by default. This setting tells RuboCop
   # to ignore them, so only the ones explicitly set in this file are enabled.
   DisabledByDefault: true
@@ -18,6 +17,7 @@ AllCops:
     - 'bin/*'
     - db/migrate/*.rb
     - db/schema.rb
+    - '.vs/**/*'
 
 Performance:
   Exclude:

@@ -1,3 +1,4 @@
+@selenium
 Feature: Accessibility Testing
   As a visitor of the website
   I want all pages I visit to be WCAG 2.0 AA compliant

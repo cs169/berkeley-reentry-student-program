@@ -12,3 +12,7 @@ Capybara.register_driver :selenium_chrome do |app|
 end
 
 Capybara.default_driver = :selenium_chrome
+
+Before do
+  WebMock.disable! if Capybara.current_driver == :selenium_chrome
+end

@@ -7,7 +7,7 @@ Feature: Canvas Authentication
     Given I am on the landing page
     When I click the button "Login with Canvas"
     Then I should be redirected to Canvas for authentication
-    And when I authorize the application
+    When I authorize the application
     Then I should be on the landing page
     And I should see "Success! You've been logged-in!"
 

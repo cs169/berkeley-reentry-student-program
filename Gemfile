@@ -114,4 +114,6 @@ group :test do
   gem "timecop"
   gem "webdrivers"
   gem "webmock"
+  gem "axe-core-rspec"
+  gem "axe-core-cucumber"
 end

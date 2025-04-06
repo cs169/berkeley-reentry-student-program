@@ -39,88 +39,35 @@
     closed in October 2024.  We will open the Crankstart Scholarship for new students again in August 2025. </p>
   </div>
 <br></br>
-  <div class="row">
-    <div class="card">
-      <h3 class="card-header">Crankstart Re-entry Scholarship</h3>
-      <div class="card-body">
-        <div class="card-text">
-          <p>The Crankstart Re-entry Scholarship provides up to $5,000 awards to ten first-semester 
-          (if you began taking courses during summer, you may still apply) undergraduate re-entry students 
-          who demonstrate the potential and capacity to positively contribute to society beyond Berkeley.  
-          <b>The Crankstart Re-entry Scholarship has closed for the 2024-2025 cycle.</b>
-          </p>
-          <p>Applicants must meet the following criteria:
-            <ul>
-              <li>Be a UC Berkeley re-entry student above the age of 25</li>
-              <li>Be an Undergraduate pursuing their first baccalaureate degree</li>
-              <li>Be in their first full semester at UC Berkeley (those who began over the summer are also eligible)</li>
-              <li>Anticipate workforce participation for a significant period of time subsequent to graduation 
-              (those planning on attending graduate school before the workforce are also eligible)</li>
-              <li>Have filed a FAFSA and be eligible to receive financial aid (Dream aid included)</li>
-              <li>Hold a minimum cumulative grade point average of 3.0 from all colleges attended</li>
-            </ul>
-          </p>
-          <p>Your application must include: 
-            <ol>
-              <li>A personal essay no more than three pages double-spaced (with one inch margins in Times New Roman font) 
-              that describes what it means to be a re-entry student. In your essay please: share your interest and values, 
-              highlight your personal achievements through your work, school, family or community service in spite of obstacles, 
-              explain how your leadership and perseverance made a difference, address the interruption to your college academics, 
-              and share your educational and career goals. </li>
-              <li>Copies of transcripts from all colleges attended (unofficial accepted)</li>
-              <li>No more than 2 letters of recommendation (can be from, for example, a former instructor, 
-                  supervisor, or mentor who can speak to your ability to apply your Berkeley education to future 
-                  contributions to society)</li>
-            </ol>
-          </p>
-          <%= link_to "The 2024 Crankstart Re-entry Scholarship has closed for the 2024-2025 cycle",
-              "https://docs.google.com/forms/d/e/1FAIpQLSfQlLgXMMbFPkaicu1szFYGFedH6EyDGY7xMnAKZnI_pdecow/closedform", 
-              class: "btn btn-info",
-              target: "_blank"%>
+
+  <% @scholarships.each do |scholarship| %>
+    <div class="row mb-4"> <%# Add margin-bottom for spacing between scholarships %>
+      <div class="card">
+        <h3 class="card-header"><%= scholarship.name %></h3>
+        <div class="card-body">
+          <div class="card-text">
+            <%= simple_format(scholarship.description) %>
+
+            <%# Display the status text and link %>
+            <% if scholarship.application_url.present? %>
+              <%= link_to scholarship.status_text.presence || "Apply Now",
+                          scholarship.application_url,
+                          class: "btn btn-info",
+                          target: "_blank" %>
+            <% else %>
+              <p><b><%= scholarship.status_text.presence || "Information not available" %></b></p>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <br></br>
-  <div class="row">
-    <div class="card">
-      <h3 class="card-header">Osher Re-entry Scholarship</h3>
-      <div class="card-body">
-        <div class="card-text">
-          <p>The Osher Re-entry Scholarship Program awards several continuing (completed at least one fall or spring semester at Berkeley) 
-          undergraduate re-entry students who demonstrate the potential and capacity to positively contribute to society 
-          beyond Berkeley with awards up to $5,000 for the academic year. <b>The Osher Re-entry Scholarship has closed for the 2024-2025 cycle.</b>
-          </p>
-          <p>Applicants must meet the following criteria:
-            <ul>
-              <li>Be a UC Berkeley re-entry student above the age of 25</li>
-              <li>Be an Undergraduate pursuing their first baccalaureate degree</li>
-              <li>Have completed at least one fall or spring semester at UC Berkeley</li>
-              <li>Anticipate workforce participation for a significant period of time subsequent to graduation</li>
-              <li>Have filed a FAFSA and be eligible to receive financial aid (Dream aid included)</li>
-              <li>Hold a minimum cumulative grade point average of 3.0 from all colleges attended</li>
-            </ul>
-          </p>
-          <p>Your application must include: 
-            <ol>
-              <li>A personal essay no more than 3 pages double-spaced (with one inch margins in Times New Roman font) that describes 
-              what it means to be a re-entry student. In your essay please: share your interest and values, highlight your personal 
-              achievements through your work, school, family or community service in spite of obstacles, explain how your leadership and 
-              perseverance made a difference, address the interruption to your college academics, and share your educational 
-              and career goals. </li>
-              <li>Copies of transcripts from all colleges attended (unofficial accepted)</li>
-              <li>No more than 2 letters of recommendation* (can be from, for example, a former instructor, supervisor or mentor 
-                  who can speak to your ability to apply your Berkeley education to future contributions to society)</li>
-            </ol>
-          </p>
-          <%= link_to "The 2024 Osher Re-entry Scholarship has closed for the 2024-2025 cycle",
-              "https://forms.gle/xakufqTN2Gsu5vur9", 
-              class: "btn btn-info",
-              target: "_blank"%>
-        </div>
-      </div>
+  <% end %>
+
+  <% if @scholarships.empty? %>
+    <div class="row">
+      <p>There are currently no scholarships listed.</p>
     </div>
-  </div>
+  <% end %>
 
 </div>
 <hr class="col mt-5 mx-auto"/>

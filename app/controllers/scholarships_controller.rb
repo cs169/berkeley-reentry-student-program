@@ -63,7 +63,6 @@ class ScholarshipsController < ApplicationController
   # end
 
   private # Move the original require_login under private and add other private methods
-
   def require_login
     unless session.key?(:current_user_id) && Student.find_by_id(session[:current_user_id])
       redirect_to root_path, flash: { error: "Please log in first!" }

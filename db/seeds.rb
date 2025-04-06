@@ -44,9 +44,9 @@ puts "Seeding Scholarships..."
 
 Scholarship.find_or_create_by!(name: "Crankstart Re-entry Scholarship") do |s|
   s.description = <<-DESC.strip_heredoc
-      <p>The Crankstart Re-entry Scholarship provides up to $5,000 awards to ten first-semester 
-      (if you began taking courses during summer, you may still apply) undergraduate re-entry students 
-      who demonstrate the potential and capacity to positively contribute to society beyond Berkeley.  
+      <p>The Crankstart Re-entry Scholarship provides up to $5,000 awards to ten first-semester#{' '}
+      (if you began taking courses during summer, you may still apply) undergraduate re-entry students#{' '}
+      who demonstrate the potential and capacity to positively contribute to society beyond Berkeley.#{'  '}
       <b>The Crankstart Re-entry Scholarship has closed for the 2024-2025 cycle.</b>
       </p>
       <p>Applicants must meet the following criteria:
@@ -54,25 +54,25 @@ Scholarship.find_or_create_by!(name: "Crankstart Re-entry Scholarship") do |s|
           <li>Be a UC Berkeley re-entry student above the age of 25</li>
           <li>Be an Undergraduate pursuing their first baccalaureate degree</li>
           <li>Be in their first full semester at UC Berkeley (those who began over the summer are also eligible)</li>
-          <li>Anticipate workforce participation for a significant period of time subsequent to graduation 
+          <li>Anticipate workforce participation for a significant period of time subsequent to graduation#{' '}
           (those planning on attending graduate school before the workforce are also eligible)</li>
           <li>Have filed a FAFSA and be eligible to receive financial aid (Dream aid included)</li>
           <li>Hold a minimum cumulative grade point average of 3.0 from all colleges attended</li>
         </ul>
       </p>
-      <p>Your application must include: 
+      <p>Your application must include:#{' '}
         <ol>
-          <li>A personal essay no more than three pages double-spaced (with one inch margins in Times New Roman font) 
-          that describes what it means to be a re-entry student. In your essay please: share your interest and values, 
-          highlight your personal achievements through your work, school, family or community service in spite of obstacles, 
-          explain how your leadership and perseverance made a difference, address the interruption to your college academics, 
+          <li>A personal essay no more than three pages double-spaced (with one inch margins in Times New Roman font)#{' '}
+          that describes what it means to be a re-entry student. In your essay please: share your interest and values,#{' '}
+          highlight your personal achievements through your work, school, family or community service in spite of obstacles,#{' '}
+          explain how your leadership and perseverance made a difference, address the interruption to your college academics,#{' '}
           and share your educational and career goals. </li>
           <li>Copies of transcripts from all colleges attended (unofficial accepted)</li>
-          <li>No more than 2 letters of recommendation (can be from, for example, a former instructor, 
-              supervisor, or mentor who can speak to your ability to apply your Berkeley education to future 
+          <li>No more than 2 letters of recommendation (can be from, for example, a former instructor,#{' '}
+              supervisor, or mentor who can speak to your ability to apply your Berkeley education to future#{' '}
               contributions to society)</li>
         </ol>
-      </p>  
+      </p>#{'  '}
   DESC
   s.status_text = "The 2024 Crankstart Re-entry Scholarship has closed for the 2024-2025 cycle."
   # You might want to leave the URL blank initially or set it to a placeholder if the real form isn't ready
@@ -81,8 +81,8 @@ end
 
 Scholarship.find_or_create_by!(name: "Osher Re-entry Scholarship") do |s|
   s.description = <<-DESC.strip_heredoc
-    <p>The Osher Re-entry Scholarship Program awards several continuing (completed at least one fall or spring semester at Berkeley) 
-          undergraduate re-entry students who demonstrate the potential and capacity to positively contribute to society 
+    <p>The Osher Re-entry Scholarship Program awards several continuing (completed at least one fall or spring semester at Berkeley)#{' '}
+          undergraduate re-entry students who demonstrate the potential and capacity to positively contribute to society#{' '}
           beyond Berkeley with awards up to $5,000 for the academic year. <b>The Osher Re-entry Scholarship has closed for the 2024-2025 cycle.</b>
           </p>
           <p>Applicants must meet the following criteria:
@@ -95,15 +95,15 @@ Scholarship.find_or_create_by!(name: "Osher Re-entry Scholarship") do |s|
               <li>Hold a minimum cumulative grade point average of 3.0 from all colleges attended</li>
             </ul>
           </p>
-          <p>Your application must include: 
+          <p>Your application must include:#{' '}
             <ol>
-              <li>A personal essay no more than 3 pages double-spaced (with one inch margins in Times New Roman font) that describes 
-              what it means to be a re-entry student. In your essay please: share your interest and values, highlight your personal 
-              achievements through your work, school, family or community service in spite of obstacles, explain how your leadership and 
-              perseverance made a difference, address the interruption to your college academics, and share your educational 
+              <li>A personal essay no more than 3 pages double-spaced (with one inch margins in Times New Roman font) that describes#{' '}
+              what it means to be a re-entry student. In your essay please: share your interest and values, highlight your personal#{' '}
+              achievements through your work, school, family or community service in spite of obstacles, explain how your leadership and#{' '}
+              perseverance made a difference, address the interruption to your college academics, and share your educational#{' '}
               and career goals. </li>
               <li>Copies of transcripts from all colleges attended (unofficial accepted)</li>
-              <li>No more than 2 letters of recommendation* (can be from, for example, a former instructor, supervisor or mentor 
+              <li>No more than 2 letters of recommendation* (can be from, for example, a former instructor, supervisor or mentor#{' '}
                   who can speak to your ability to apply your Berkeley education to future contributions to society)</li>
             </ol>
           </p>

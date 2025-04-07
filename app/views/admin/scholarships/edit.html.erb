@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="<%=flash.empty? ? 'px-4 py-5 my-2' : 'px-4 pb-5 mb-5' %> text-center">
+    <%= render "shared/flash_messages" %>
+    <h1 class="display-5 fw-bold">Edit Scholarship</h1>
+
+    <%# Assume @scholarship is passed from the controller %>
+    <%= form_with model: @scholarship, url: scholarship_path(@scholarship), method: :patch, local: true, class: "col-md-6 mx-auto text-start" do |form| %>
+      
+      <%# Display validation errors if any %>
+      <% if @scholarship.errors.any? %>
+        <div style="color: red;">
+          <h2><%= pluralize(@scholarship.errors.count, "error") %> prohibited this scholarship from being saved:</h2>
+          <ul>
+            <% @scholarship.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%# --- RESTORING FORM FIELDS --- %>
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control", required: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, class: "form-control", rows: 5 %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :status_text, "Status", class: "form-label" %>
+        <%= form.text_field :status_text, class: "form-control" %>
+        <div class="form-text">E.g., "Open", "Closed", "Deadline Approaching"</div>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :application_url, "Application URL", class: "form-label" %>
+        <%= form.url_field :application_url, class: "form-control" %>
+      </div>
+
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+        <%= form.submit "Update Scholarship", class: "btn btn-primary btn-lg px-4 gap-3" %>
+        <%= link_to "Cancel", scholarships_path, class: "btn btn-secondary btn-lg px-4 gap-3" %> 
+      </div>
+    <% end %> <%# --- ADDED MISSING END TAG --- %>
+
+    <%= link_to "back to admin dashboard".html_safe, admins_path, class: "btn btn-outline-secondary mt-5 btn-lg px-4 gap-3" %>
+  </div>
+</div>

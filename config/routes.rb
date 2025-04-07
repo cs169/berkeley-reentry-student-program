@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   # the admin dashboard
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
+  get "edit_scholarships", to: "admin/scholarships#edit"
+
   # user routes
   patch "user", to: "users#update"
   get "user/profile/new", to: "users#profile_new", as: "user_profile_new"
@@ -35,4 +37,8 @@ Rails.application.routes.draw do
   # Routes for Canvas authentication
   post "login/canvas", to: "login#canvas_login", as: "canvas_login"
   get "auth/canvas/callback", to: "sessions#canvas_callback", as: "canvas_callback"
+
+  namespace :administration do
+    resources :scholarships
+  end
 end

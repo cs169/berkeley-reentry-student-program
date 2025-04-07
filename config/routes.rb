@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "podcasts", to: "podcasts#index"
   # courses page
   get "courses", to: "courses#index"
+  # events page
+  get "events", to: "events#index"
   # the admin dashboard
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"

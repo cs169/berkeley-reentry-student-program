@@ -131,11 +131,24 @@ b {
 #footer {
   background-color: #003262;
   box-sizing: border-box;
-  color: #ccc;
+  color: #ffffff;
   margin: 36px 0;
   margin-bottom: 0;
   font-size: 13px;
   display: block;
+}
+
+#footer a {
+  color: #ffffffda; 
+}
+
+#footer p,
+#footer span {
+  color: #ffffffda;
+}
+
+#footer h2 {
+  font-size: 23px;
 }
 
 .element-invisible {

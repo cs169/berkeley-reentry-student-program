@@ -8,7 +8,7 @@ Background: logged in student, on landing page
     And I am on the landing page
 
 Scenario: student should be able to see a link to events
-    Then I should go to "Events"
+    Then I should got "Events"
 
 Scenario: student should be redirected to the events page after clicking "Events"
     When I click "Events"

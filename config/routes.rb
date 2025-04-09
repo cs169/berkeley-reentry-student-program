@@ -42,5 +42,4 @@ Rails.application.routes.draw do
   # Routes for Canvas authentication
   post "login/canvas", to: "login#canvas_login", as: "canvas_login"
   get "auth/canvas/callback", to: "sessions#canvas_callback", as: "canvas_callback"
-
 end

@@ -24,36 +24,36 @@ class AdminsController < ApplicationController
 
   def new
     @scholarship = Scholarship.new
-    render 'admins/scholarships/new'
+    render "admins/scholarships/new"
   end
 
   def create
     @scholarship = Scholarship.new(scholarship_params)
     if @scholarship.save
-      redirect_to edit_scholarships_path, notice: 'Scholarship was successfully created.'
+      redirect_to edit_scholarships_path, notice: "Scholarship was successfully created."
     else
-      render 'admins/scholarships/new'
+      render "admins/scholarships/new"
     end
   end
 
   def edit
     @scholarship = Scholarship.find(params[:id])
-    render 'admins/scholarships/edit'
+    render "admins/scholarships/edit"
   end
 
   def update
     @scholarship = Scholarship.find(params[:id])
     if @scholarship.update(scholarship_params)
-      redirect_to edit_scholarships_path, notice: 'Scholarship was successfully updated.'
+      redirect_to edit_scholarships_path, notice: "Scholarship was successfully updated."
     else
-      render 'admins/scholarships/edit'
+      render "admins/scholarships/edit"
     end
   end
 
   def destroy
     @scholarship = Scholarship.find(params[:id])
     @scholarship.destroy
-    redirect_to edit_scholarships_path, notice: 'Scholarship was successfully deleted.'
+    redirect_to edit_scholarships_path, notice: "Scholarship was successfully deleted."
   end
 
   private

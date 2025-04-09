@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="<%=flash.empty? ? 'px-4 py-5 my-2' : 'px-4 pb-5 mb-5' %> text-center">
+    <%= render "shared/flash_messages" %>
+    <h1 class="display-5 fw-bold">Manage Scholarships</h1>
+    
+    <table class="table table-striped col-md-12" id="scholarships_table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Application URL</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @scholarships.each do |scholarship| %>
+          <tr>
+            <td><%= scholarship.name %></td>
+            <td><%= truncate(scholarship.description, length: 100) %></td>
+            <td><%= scholarship.status_text %></td>
+            <td>
+              <% if scholarship.application_url.present? %>
+                <%= link_to "View Link", scholarship.application_url, target: "_blank" %>
+              <% else %>
+                No URL
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "Edit", edit_scholarship_path(scholarship), class: "btn btn-warning btn-sm me-2" %>
+              <%= link_to "Delete", destroy_scholarship_path(scholarship), 
+                          method: :delete,
+                          data: { confirm: "Are you sure you want to delete '#{scholarship.name}'?" },
+                          class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%# Pagination %>
+    <div class="move-page">
+      <%= link_to "previous page".html_safe, edit_scholarships_path(page: params[:page].to_i - 1),
+          class: "btn btn-secondary mt-1 btn-lg px-4 gap-3 #{params[:page].to_i <= 1 ? 'disabled' : nil}" %>
+      <%= link_to "next page".html_safe, edit_scholarships_path(page: params[:page].to_i + 1), 
+          class: "btn btn-secondary mt-1 btn-lg px-4 gap-3 text-right #{!@has_next_page ? 'disabled' : nil}" %>
+    </div>
+
+    <%= link_to "back to admin dashboard".html_safe, admins_path, class: "btn btn-secondary mt-1 btn-lg px-4 gap-3" %>
+  </div>
+</div>

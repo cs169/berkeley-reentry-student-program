@@ -39,7 +39,7 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
       - Install PostgreSQL: `sudo apt install postgresql postgresql-contrib`
       - Start PostgreSQL server: `sudo service postgresql start`
 4. Run `bundle install --without production`
-5. Run `rake db:create`, `rake db:schema:load`, and `rake db:migrate`
+5. Run `rake db:create && rake db:schema:load && rake db:migrate && rake db:seed`
 6. Follow [these instructions](https://devcenter.heroku.com/articles/creating-apps) to create & setup a new Heroku app on the CLI
 7. Our code requires 4 environment variables to work correctly in production & local environments. 
   - **Local Development**: You must set a non-empty string for the environment variables `ADMIN`, `STAFF`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET`

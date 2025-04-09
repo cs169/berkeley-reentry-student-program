@@ -93,6 +93,21 @@ b {
   color: #554AF0;
 }
 
+.btn-info {
+  background-color: #c48828;
+  border-color: #c48828;
+  color: white;
+  font-size: 24px;
+}
+
+.btn-info:hover {
+  background-color: #c48828;
+  border-color: #c48828;
+  color: white;
+  text-decoration: underline;
+  font-size: 24px;
+}
+
 .form-text {
   font-family: 'Poppins', sans-serif;
   font-style: normal;
@@ -116,11 +131,24 @@ b {
 #footer {
   background-color: #003262;
   box-sizing: border-box;
-  color: #ccc;
+  color: #ffffff;
   margin: 36px 0;
   margin-bottom: 0;
   font-size: 13px;
   display: block;
+}
+
+#footer a {
+  color: #ffffffda; 
+}
+
+#footer p,
+#footer span {
+  color: #ffffffda;
+}
+
+#footer h2 {
+  font-size: 23px;
 }
 
 .element-invisible {
@@ -152,7 +180,7 @@ b {
 }
 
 .nav-dull {
-  color: grey;
+  color: darkgray;
 }
 
 ul.nav,

@@ -16,9 +16,13 @@ Rails.application.routes.draw do
   get "podcasts", to: "podcasts#index"
   # courses page
   get "courses", to: "courses#index"
+  # events page
+  get "events", to: "events#index"
   # the admin dashboard
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
+  get "edit_scholarships", to: "admin/scholarships#edit"
+
   # user routes
   patch "user", to: "users#update"
   get "user/profile/new", to: "users#profile_new", as: "user_profile_new"
@@ -29,4 +33,12 @@ Rails.application.routes.draw do
   get "auth/failure", to: redirect("/")
   get "logout", to: "sessions#google_auth_logout"
   get "login/confirm", to: "login#confirm"
+
+  # Routes for Canvas authentication
+  post "login/canvas", to: "login#canvas_login", as: "canvas_login"
+  get "auth/canvas/callback", to: "sessions#canvas_callback", as: "canvas_callback"
+
+  namespace :administration do
+    resources :scholarships
+  end
 end

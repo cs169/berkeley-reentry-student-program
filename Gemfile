@@ -35,6 +35,10 @@ gem "sass-rails", "~> 5.0"
 # Use for Google Oauth 2.0
 gem "omniauth-google-oauth2"
 
+# Use for Canvas authentication
+gem "omniauth"
+gem "omniauth-oauth2"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder", "~> 2.10.1"
 
@@ -106,4 +110,7 @@ group :test do
   gem "docile", "~> 1.4", ">= 1.4.1", require: false
   gem "timecop"
   gem "webdrivers"
+  gem "webmock"
+  gem "axe-core-rspec"
+  gem "axe-core-cucumber"
 end

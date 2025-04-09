@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 # spec/requests/checkin_spec.rb
 
 require "rails_helper"
 
 RSpec.describe "Checkin", type: :request do
-
   let(:student)        { FactoryBot.create(:student) }
   let(:expected_time)  { DateTime.parse("2022-03-08T12:00:00-08:00") }
 

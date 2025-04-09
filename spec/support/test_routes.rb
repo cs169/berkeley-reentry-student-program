@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/support/test_routes.rb
 
 if Rails.env.test? && !Rails.application.routes.named_routes.key?(:__test_login)

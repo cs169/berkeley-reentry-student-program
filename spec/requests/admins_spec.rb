@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 # spec/requests/admins_spec.rb
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Admins", type: :request do
-
   describe "Access control for admin dashboard" do
     it "blocks a student from accessing the admin dashboard" do
       student = FactoryBot.create(:student)

@@ -102,7 +102,7 @@ group :test do
   gem "cucumber-rails", "~> 2.6.1", require: false
   gem "cucumber-rails-training-wheels" # basic imperative step defs like "Then I should see..."
   gem "database_cleaner", "~> 1.8.5" # required by Cucumber
-  gem 'rails-controller-testing', github: 'rails/rails-controller-testing'
+  gem "rails-controller-testing", github: "rails/rails-controller-testing"
   gem "selenium-webdriver"
   gem "simplecov", "~> 0.22.0", require: false
   gem "simplecov-html", "~> 0.13.1", require: false

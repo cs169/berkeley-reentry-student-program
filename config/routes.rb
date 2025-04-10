@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
   get "edit_scholarships", to: "admin/scholarships#edit"
+  namespace :admin do
+    resources :events
+  end  
 
   # user routes
   patch "user", to: "users#update"

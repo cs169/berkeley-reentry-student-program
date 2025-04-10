@@ -58,9 +58,9 @@ class ScholarshipsController < ApplicationController
   end
 
   # If you need a show action
-  # def show
-  #   # @scholarship is set by set_scholarship
-  # end
+  def show
+    @scholarship = Scholarship.find(params[:id])
+  end
 
   private # Move the original require_login under private and add other private methods
   def require_login

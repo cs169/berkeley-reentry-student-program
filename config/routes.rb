@@ -11,7 +11,15 @@ Rails.application.routes.draw do
   # appointments page
   get "appointments", to: "appointments#advisors"
   # scholarships page
+  get "scholarships/new", to: "admins#new", as: :new_scholarship
   get "scholarships", to: "scholarships#index"
+  get "scholarships/:id", to: "scholarships#show", as: :scholarship
+  get "edit_scholarships", to: "admins#edit_scholarships"
+  post "scholarships", to: "admins#create", as: :create_scholarship
+  get "scholarships/:id/edit", to: "admins#edit", as: :edit_scholarship
+  patch "scholarships/:id", to: "admins#update", as: :update_scholarship
+  delete "scholarships/batch_delete", to: "admins#batch_delete", as: :batch_delete_scholarships
+  delete "scholarships/:id", to: "admins#destroy", as: :destroy_scholarship
   # podcast page
   get "podcasts", to: "podcasts#index"
   # courses page
@@ -21,7 +29,6 @@ Rails.application.routes.draw do
   # the admin dashboard
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
-  get "edit_scholarships", to: "admin/scholarships#edit"
 
   # advisor routes
   get "manage_advisors", to: "admins#manage_advisors", as: "manage_advisors"

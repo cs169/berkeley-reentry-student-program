@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   get "appointments", to: "appointments#advisors"
   # scholarships page
   get "scholarships", to: "scholarships#index"
+  get "edit_scholarships", to: "admins#edit_scholarships"
+  post "scholarships", to: "admins#create", as: :create_scholarship
+  get "scholarships/new", to: "admins#new"
+  get "scholarships/:id/edit", to: "admins#edit", as: :edit_scholarship
+  patch "scholarships/:id", to: "admins#update", as: :update_scholarship
+  delete "scholarships/:id", to: "admins#destroy", as: :destroy_scholarship
   # podcast page
   get "podcasts", to: "podcasts#index"
   # courses page
@@ -21,7 +27,6 @@ Rails.application.routes.draw do
   # the admin dashboard
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
-  get "edit_scholarships", to: "admin/scholarships#edit"
 
   # user routes
   patch "user", to: "users#update"
@@ -37,8 +42,4 @@ Rails.application.routes.draw do
   # Routes for Canvas authentication
   post "login/canvas", to: "login#canvas_login", as: "canvas_login"
   get "auth/canvas/callback", to: "sessions#canvas_callback", as: "canvas_callback"
-
-  namespace :administration do
-    resources :scholarships
-  end
 end

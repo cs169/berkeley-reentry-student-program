@@ -22,13 +22,22 @@ Rails.application.routes.draw do
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
   get "edit_scholarships", to: "admin/scholarships#edit"
-  get "edit_advisors", to: "admins#edit_advisors"
+
+  # advisor routes
+  get "manage_advisors", to: "admins#manage_advisors", as: "manage_advisors"
+  get "/advisors/new", to: "advisors#new"
+  post "/advisors", to: "advisors#create"
+  get "/advisors/:id/edit", to: "advisors#edit", as: "edit_advisor"
+  patch "/advisors/:id", to: "advisors#update"
+  delete "/advisors/:id", to: "advisors#destroy", as: "delete_advisor"
+  get "/advisors/:id", to: "advisors#destroy"
 
   # user routes
   patch "user", to: "users#update"
   get "user/profile/new", to: "users#profile_new", as: "user_profile_new"
   patch "user/profile/update", to: "users#profile_update", as: "user_profile_update"
   get "user/profile/edit", to: "users#profile_edit", as: "user_profile_edit"
+
   # Routes for Google authentication
   get "auth/google_oauth2/callback", to: "sessions#google_auth", as: "google_login"
   get "auth/failure", to: redirect("/")
@@ -38,8 +47,4 @@ Rails.application.routes.draw do
   # Routes for Canvas authentication
   post "login/canvas", to: "login#canvas_login", as: "canvas_login"
   get "auth/canvas/callback", to: "sessions#canvas_callback", as: "canvas_callback"
-
-  namespace :administration do
-    resources :scholarships
-  end
 end

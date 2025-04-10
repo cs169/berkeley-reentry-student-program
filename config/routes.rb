@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   post "scholarships", to: "admins#create", as: :create_scholarship
   get "scholarships/:id/edit", to: "admins#edit", as: :edit_scholarship
   patch "scholarships/:id", to: "admins#update", as: :update_scholarship
-  delete "scholarships/:id", to: "admins#destroy", as: :destroy_scholarship
   delete "scholarships/batch_delete", to: "admins#batch_delete", as: :batch_delete_scholarships
+  delete "scholarships/:id", to: "admins#destroy", as: :destroy_scholarship
   # podcast page
   get "podcasts", to: "podcasts#index"
   # courses page

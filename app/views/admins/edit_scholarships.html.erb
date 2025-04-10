@@ -6,6 +6,7 @@
     <table class="table table-striped col-md-12" id="scholarships_table">
       <thead>
         <tr>
+          <th>Select</th>
           <th>Name</th>
           <th>Description</th>
           <th>Status</th>
@@ -16,6 +17,9 @@
       <tbody>
         <% @scholarships.each do |scholarship| %>
           <tr>
+            <td>
+              <input type="radio" name="selected_scholarship" value="<%= scholarship.id %>" class="scholarship-radio">
+            </td>
             <td><%= scholarship.name %></td>
             <td><%= truncate(scholarship.description, length: 100) %></td>
             <td><%= scholarship.status_text %></td>
@@ -28,15 +32,17 @@
             </td>
             <td>
               <%= link_to "Edit", edit_scholarship_path(scholarship), class: "btn btn-warning btn-sm me-2" %>
-              <%= link_to "Delete", destroy_scholarship_path(scholarship), 
-                          method: :delete,
-                          data: { confirm: "Are you sure you want to delete '#{scholarship.name}'?" },
-                          class: "btn btn-danger btn-sm" %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+
+    <div class="mt-4">
+      <button id="deleteButton" class="btn btn-danger btn-lg" disabled>
+        Delete Selected Scholarship
+      </button>
+    </div>
 
     <%# Pagination %>
     <div class="move-page">
@@ -49,3 +55,48 @@
     <%= link_to "back to admin dashboard".html_safe, admins_path, class: "btn btn-secondary mt-1 btn-lg px-4 gap-3" %>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const deleteButton = document.getElementById('deleteButton');
+  const radioButtons = document.querySelectorAll('.scholarship-radio');
+  
+  // 监听单选框变化
+  radioButtons.forEach(radio => {
+    radio.addEventListener('change', function() {
+      deleteButton.disabled = !this.checked;
+    });
+  });
+  
+  // 处理删除按钮点击
+  deleteButton.addEventListener('click', function() {
+    const selectedRadio = document.querySelector('input[name="selected_scholarship"]:checked');
+    if (selectedRadio) {
+      const scholarshipId = selectedRadio.value;
+      const scholarshipName = selectedRadio.closest('tr').querySelector('td:nth-child(2)').textContent.trim();
+      
+      if (confirm(`Are you sure you want to delete '${scholarshipName}'?`)) {
+        const deleteUrl = `/scholarships/${scholarshipId}`;
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = deleteUrl;
+        
+        const methodInput = document.createElement('input');
+        methodInput.type = 'hidden';
+        methodInput.name = '_method';
+        methodInput.value = 'delete';
+        
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = 'authenticity_token';
+        csrfToken.value = document.querySelector('meta[name="csrf-token"]').content;
+        
+        form.appendChild(methodInput);
+        form.appendChild(csrfToken);
+        document.body.appendChild(form);
+        form.submit();
+      }
+    }
+  });
+});
+</script>

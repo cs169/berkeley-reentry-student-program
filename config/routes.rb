@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   # the admin dashboard
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
-  
+
   namespace :admin do
     resources :events
   end

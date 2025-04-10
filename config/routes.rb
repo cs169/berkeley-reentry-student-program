@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get "edit_scholarships", to: "admin/scholarships#edit"
   namespace :admin do
     resources :events
-  end  
+  end
 
   # user routes
   patch "user", to: "users#update"

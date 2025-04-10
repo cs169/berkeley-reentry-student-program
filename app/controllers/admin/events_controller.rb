@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::EventsController < ApplicationController
   before_action :check_if_admin
 
@@ -35,12 +37,11 @@ class Admin::EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    redirect_to admin_events_path, notice: 'Event deleted successfully.'
+    redirect_to admin_events_path, notice: "Event deleted successfully."
   end
 
   private
-
   def event_params
-    params.require(:event).permit(:title, :date, :start_time, :end_time, :location, :description, :flyer) #may change later, not sure what we want to include
+    params.require(:event).permit(:title, :date, :start_time, :end_time, :location, :description, :flyer) # may change later, not sure what we want to include
   end
 end

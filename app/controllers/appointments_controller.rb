@@ -4,6 +4,7 @@ class AppointmentsController < ApplicationController
   before_action :require_login
 
   def advisors
+    @advisors = Advisor.where(active: true)
   end
 
   def require_login

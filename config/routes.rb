@@ -11,14 +11,15 @@ Rails.application.routes.draw do
   # appointments page
   get "appointments", to: "appointments#advisors"
   # scholarships page
+  get "scholarships/new", to: "admins#new", as: :new_scholarship
   get "scholarships", to: "scholarships#index"
-  delete "scholarships/:id", to: "admins#destroy", as: :destroy_scholarship
   get "scholarships/:id", to: "scholarships#show", as: :scholarship
   get "edit_scholarships", to: "admins#edit_scholarships"
   post "scholarships", to: "admins#create", as: :create_scholarship
-  get "scholarships/new", to: "admins#new"
   get "scholarships/:id/edit", to: "admins#edit", as: :edit_scholarship
   patch "scholarships/:id", to: "admins#update", as: :update_scholarship
+  delete "scholarships/:id", to: "admins#destroy", as: :destroy_scholarship
+  delete "scholarships/batch_delete", to: "admins#batch_delete", as: :batch_delete_scholarships
   # podcast page
   get "podcasts", to: "podcasts#index"
   # courses page

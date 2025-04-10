@@ -56,6 +56,16 @@ class AdminsController < ApplicationController
     redirect_to edit_scholarships_path, notice: "Scholarship was successfully deleted."
   end
 
+  def batch_delete
+    scholarship_ids = params[:scholarship_ids]
+    if scholarship_ids.present?
+      Scholarship.where(id: scholarship_ids).destroy_all
+      redirect_to edit_scholarships_path, notice: "Selected scholarships were successfully deleted."
+    else
+      redirect_to edit_scholarships_path, alert: "No scholarships were selected for deletion."
+    end
+  end
+
   private
   def check_permission
     admin = Admin.find_by_id(session[:current_user_id])

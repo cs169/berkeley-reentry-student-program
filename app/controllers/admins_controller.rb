@@ -18,6 +18,10 @@ class AdminsController < ApplicationController
     @has_next_page = @checkin_records.size == 20
   end
 
+  def manage_advisors
+    @advisors = Advisor.all
+  end
+  
   def edit_scholarships
     @scholarships = Scholarship.all
   end

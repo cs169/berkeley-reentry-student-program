@@ -1,20 +1,24 @@
 <html lang="en">
-<div class="container ">
-<br></br><h1 class="display-5 fw-bold" align = "center" style = "color: #003262">Make an Appointment with a Counselor</h1><br></br>
-    <div class="row">
-      <br></br><p class="lead mb-4" align="center">Julio</p>
-      <iframe class="col-lg-12 col-md-12 col-sm-12" src="https://juliogomez-12.youcanbook.me/" height="500" width="300" align = "center">
-          this is an iframe
-      </iframe>
-      <br></br><p class="lead mb-4" align="center">Cris</p>
-      <iframe class="col-lg-12 col-md-12 col-sm-12" src="https://cgomez-2.youcanbook.me/" height="500" width="300" alight = "center">
-          this is an iframe
-      </iframe>
-      </div>
-      <hr class="col mt-5 mx-auto"/>
-      <div class="col-lg-6 mt-5 mx-auto" align="center">
-        <%= link_to "Back", root_path, method: :get, class:"btn btn-secondary btn-lg my-4", style:"color:#003262" %>
-      </div>
-      </div>
+<div class="container">
+  <br></br>
+  <h1 class="display-5 fw-bold" align="center" style="color: #003262">Make an Appointment with a Counselor</h1>
+  <br></br>
+  <div class="row">
+    <% @advisors.each do |advisor| %>
+      <% if advisor.active %>
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+          <p class="lead mb-4" align="center"><%= advisor.name %></p>
+          <p class="lead mb-4" align="center"><%= advisor.description %></p>
+          <iframe class="col-lg-12 col-md-12 col-sm-12" src="<%= advisor.calendar %>" height="500" width="300" align="center">
+            Your browser does not support iframes.
+          </iframe>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <hr class="col mt-5 mx-auto" />
+  <div class="col-lg-6 mt-5 mx-auto" align="center">
+    <%= link_to "Back", root_path, method: :get, class: "btn btn-secondary btn-lg my-4", style: "color:#003262" %>
+  </div>
 </div>
 </html>

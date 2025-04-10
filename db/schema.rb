@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_04_06_052745) do
+ActiveRecord::Schema.define(version: 2025_04_09_195822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advisors", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "calendar"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "announcements", force: :cascade do |t|
     t.string "title"
@@ -43,6 +52,15 @@ ActiveRecord::Schema.define(version: 2025_04_06_052745) do
     t.datetime "updated_at", null: false
     t.string "reason"
     t.index ["student_id"], name: "index_checkins_on_student_id"
+  end
+
+  create_table "counselors", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "calendar"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "events", force: :cascade do |t|

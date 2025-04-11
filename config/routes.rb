@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get "/advisors/new", to: "advisors#new"
   post "/advisors", to: "advisors#create"
   get "/advisors/:id/edit", to: "advisors#edit", as: "edit_advisor"
-  patch "/advisors/:id", to: "advisors#update"
+  patch "/advisors/:id", to: "advisors#update", as: "advisor"
   delete "/advisors/:id", to: "advisors#destroy", as: "delete_advisor"
   get "/advisors/:id", to: "advisors#destroy"
 

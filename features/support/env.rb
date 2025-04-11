@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "webmock/cucumber"
+
+WebMock.disable_net_connect!(allow_localhost: true, allow: '127.0.0.1:9515')
 require "simplecov"
 require "simplecov_json_formatter"
 SimpleCov.start "rails"

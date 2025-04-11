@@ -29,27 +29,27 @@ ActiveRecord::Schema.define(version: 2025_04_09_195822) do
     t.text "content"
     t.date "issued_date"
     t.bigint "admin_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_announcements_on_admin_id"
   end
 
   create_table "appointments", force: :cascade do |t|
-    t.datetime "time"
+    t.datetime "time", precision: nil
     t.string "location"
     t.bigint "staff_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "student_id"
     t.index ["staff_id"], name: "index_appointments_on_staff_id"
     t.index ["student_id"], name: "index_appointments_on_student_id"
   end
 
   create_table "checkins", force: :cascade do |t|
-    t.datetime "time"
+    t.datetime "time", precision: nil
     t.bigint "student_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "reason"
     t.index ["student_id"], name: "index_checkins_on_student_id"
   end
@@ -91,14 +91,14 @@ ActiveRecord::Schema.define(version: 2025_04_09_195822) do
     t.boolean "is_student"
     t.boolean "is_admin"
     t.boolean "is_staff"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "google_token"
     t.string "google_refresh_token"
     t.string "major"
     t.string "identities"
     t.string "pronouns"
-    t.datetime "grad_year"
+    t.datetime "grad_year", precision: nil
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["sid"], name: "index_users_on_sid", unique: true
   end

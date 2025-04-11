@@ -26,7 +26,7 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
 
 ## First-Time Setup Instructions
 
-1. Fork & clone the repository locally!
+1. Clone the repository locally and then make your own branch!!
 2. Install Ruby version 3.0.3, and switch to that version using `rvm use 3.0.3`
 3. You must have PostgreSQL installed locally to run the rails server. 
     - **For Mac**:

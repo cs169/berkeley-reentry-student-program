@@ -54,15 +54,6 @@ ActiveRecord::Schema.define(version: 2025_04_09_195822) do
     t.index ["student_id"], name: "index_checkins_on_student_id"
   end
 
-  create_table "counselors", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "calendar"
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.date "date"

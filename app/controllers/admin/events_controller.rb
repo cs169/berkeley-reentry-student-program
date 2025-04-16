@@ -33,7 +33,7 @@ class Admin::EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to admin_events_path, notice: "Event updated successfully."
+      redirect_to admin_events_path, flash: { success: "Event updated successfully." }
     else
       flash.now[:alert] = 'Failed to update event.'
       render :edit

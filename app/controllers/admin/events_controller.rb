@@ -15,7 +15,7 @@ class Admin::EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to admin_events_path, notice: "Event created successfully."
+      redirect_to admin_events_path, flash: { success: "Event created successfully." }
     else
       flash.now[:alert] = "Missing values. Failed to create event."
       render :new

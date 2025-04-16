@@ -24,6 +24,10 @@ Feature: Accessibility Testing
     Given I am on the courses page
     Then the page should be axe clean
 
+  Scenario: Check events page accessibility
+    Given I am on the events page
+    Then the page should be axe clean
+
   Scenario: Check create new user profile page accessibility
     Given I am on the user_profile_new page
     Then the page should be axe clean
@@ -38,4 +42,12 @@ Feature: Accessibility Testing
 
   Scenario: Check view checkin records page accessibility
     Given I am on the view_checkin_records page
+    Then the page should be axe clean
+
+  Scenario: Check admin events page accessibility
+    Given I am on the admin_events page
+    Then the page should be axe clean
+  
+  Scenario: Check admin new event page accessibility
+    Given I am on the new_admin_event page
     Then the page should be axe clean

@@ -5,14 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.7"
 
-gem "actionpack", "= 6.1.4"
-
-gem "activesupport", "= 6.1.4"
-
-gem "concurrent-ruby", "= 1.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 6.1.4"
+gem "rails", "~> 7.1.1"
 
 gem "pg"
 
@@ -67,7 +62,7 @@ gem "bootsnap", require: false
 # Gemfile
 gem "omniauth-rails_csrf_protection"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 # Use for New Relic APM
 gem "newrelic_rpm"
@@ -84,7 +79,7 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console", "~> 3.7.0"
+  gem "web-console", "~> 4.2.0"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -103,14 +98,16 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", "~> 3.0"
-  gem "cucumber", "~> 3.0.0"
-  gem "cucumber-rails", "~> 1.7.0", require: false
+  gem "cucumber", "~> 3.2.0"
+  gem "cucumber-rails", "~> 2.6.1", require: false
   gem "cucumber-rails-training-wheels" # basic imperative step defs like "Then I should see..."
   gem "database_cleaner", "~> 1.8.5" # required by Cucumber
-  gem "rails-controller-testing"
+  gem "rails-controller-testing", github: "rails/rails-controller-testing"
   gem "selenium-webdriver"
-  gem "simplecov", "~> 0.21.2", require: false
-  gem "simplecov_json_formatter", "~> 0.1.2", require: false
+  gem "simplecov", "~> 0.22.0", require: false
+  gem "simplecov-html", "~> 0.13.1", require: false
+  gem "simplecov_json_formatter", "~> 0.1.4", require: false
+  gem "docile", "~> 1.4", ">= 1.4.1", require: false
   gem "timecop"
   gem "webdrivers"
   gem "webmock"

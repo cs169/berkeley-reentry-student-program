@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "pages#index"
   # route GET /check-in to login controller and #index action
-  get "checkin", to: "checkin#new"
-  post "checkin", to: "checkin#create"
+  get "checkin", to: "checkin#new", as: "new_checkin"
+  post "checkin", to: "checkin#create", as: "checkin"
   # appointments page
   get "appointments", to: "appointments#advisors"
   # scholarships page
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   # the admin dashboard
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
-  
+
   # event routes
   namespace :admin do
     resources :events
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get "/advisors/new", to: "advisors#new"
   post "/advisors", to: "advisors#create"
   get "/advisors/:id/edit", to: "advisors#edit", as: "edit_advisor"
-  patch "/advisors/:id", to: "advisors#update"
+  patch "/advisors/:id", to: "advisors#update", as: "advisor"
   delete "/advisors/:id", to: "advisors#destroy", as: "delete_advisor"
   get "/advisors/:id", to: "advisors#destroy"
 

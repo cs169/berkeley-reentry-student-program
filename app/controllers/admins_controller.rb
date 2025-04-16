@@ -21,7 +21,7 @@ class AdminsController < ApplicationController
   def manage_advisors
     @advisors = Advisor.all
   end
-  
+
   def edit_scholarships
     @scholarships = Scholarship.all
   end

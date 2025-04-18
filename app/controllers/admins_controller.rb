@@ -72,6 +72,7 @@ class AdminsController < ApplicationController
 
   def manage_courses
     @courses = Course.all
+    render "admins/courses/manage" # Explicitly specify the template to render
   end
 
   def new_course

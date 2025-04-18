@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_11_044225) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_18_103445) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,6 +89,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_11_044225) do
     t.datetime "updated_at", null: false
     t.string "reason"
     t.index ["student_id"], name: "index_checkins_on_student_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "code"
+    t.string "title"
+    t.text "description"
+    t.string "units"
+    t.string "semester"
+    t.string "schedule"
+    t.string "ccn"
+    t.string "location"
+    t.boolean "available"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|

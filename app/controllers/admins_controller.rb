@@ -70,6 +70,51 @@ class AdminsController < ApplicationController
     end
   end
 
+  def manage_courses
+    @courses = Course.all
+  end
+
+  def new_course
+    @course = Course.new
+    render "admins/courses/new"
+  end
+
+  def create_course
+    @course = Course.new(course_params)
+    if @course.save
+      redirect_to manage_courses_path, notice: "Course was successfully created."
+    else
+      render "admins/courses/new"
+    end
+  end
+
+  def edit_course
+    @course = Course.find(params[:id])
+    render "admins/courses/edit"
+  end
+
+  def update_course
+    @course = Course.find(params[:id])
+    if @course.update(course_params)
+      redirect_to manage_courses_path, notice: "Course was successfully updated."
+    else
+      render "admins/courses/edit"
+    end
+  end
+
+  def destroy_course
+    @course = Course.find(params[:id])
+    @course.destroy
+    redirect_to manage_courses_path, notice: "Course was successfully deleted."
+  end
+
+  def export_courses
+    @courses = Course.all
+    respond_to do |format|
+      format.csv { send_data Course.to_csv, filename: "courses-#{Date.today}.csv" }
+    end
+  end
+
   private
   def check_permission
     admin = Admin.find_by_id(session[:current_user_id])
@@ -78,6 +123,10 @@ class AdminsController < ApplicationController
 
   def scholarship_params
     params.require(:scholarship).permit(:name, :description, :status_text, :application_url)
+  end
+
+  def course_params
+    params.require(:course).permit(:code, :title, :description, :units, :semester, :schedule, :ccn, :location, :available)
   end
 
   def require_admin

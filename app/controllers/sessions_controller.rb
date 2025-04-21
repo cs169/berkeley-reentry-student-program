@@ -38,6 +38,7 @@ class SessionsController < ApplicationController
     if ENV["MOCK_CANVAS_LOGIN"] == "true"
       # Read the role from params (default to "student" if none)
       role = params[:mock_role] || "student"
+      flash: {success "Role is #{role}"}
   
       fake_email = case role
                    when "admin"
@@ -49,7 +50,7 @@ class SessionsController < ApplicationController
       existing_user = User.where(email: fake_email).first
       if existing_user.present?
         session[:current_user_id] = existing_user.id
-        redirect_to root_path, flash: { success: "Success! You've been logged-in!" }
+        redirect_to root_path, flash: { success: "Success! You've been logged-in as #{fake_email}!" }
         return
       end
 

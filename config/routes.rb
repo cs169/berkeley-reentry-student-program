@@ -32,7 +32,11 @@ Rails.application.routes.draw do
 
   # event routes
   namespace :admin do
-    resources :events
+    resources :events do
+      collection do
+        get :export_events, defaults: { format: :csv }, as: :export
+      end
+    end
   end
 
   # advisor routes

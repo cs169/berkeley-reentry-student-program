@@ -6,6 +6,7 @@ class Admin::EventsController < ApplicationController
 
   def index
     @events = Event.all
+    render "admin/events/index"
   end
 
   def new
@@ -47,6 +48,13 @@ class Admin::EventsController < ApplicationController
       redirect_to admin_events_path, flash: { success: "Event deleted successfully." }
     else
       redirect_to admin_events_path, flash: { error: "Failed to delete event." }
+    end
+  end
+
+  def export_events
+    @events = Event.all
+    respond_to do |format|
+      format.csv { send_data Event.to_csv, filename: "events-#{Date.today}.csv" }
     end
   end
 

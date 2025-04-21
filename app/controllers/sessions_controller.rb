@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
   
       fake_email = case role
                    when "admin"
-                     "google_admin@berkeley.edu"
+                     "169reentryadmin@berkeley.edu"
                    else
                      "studentuser@berkeley.edu"
                    end

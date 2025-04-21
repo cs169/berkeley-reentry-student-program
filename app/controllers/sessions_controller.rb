@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
     if ENV["MOCK_CANVAS_LOGIN"] == "true"
       # Read the role from params (default to "student" if none)
       role = params[:mock_role] || "student"
-
+      admins = ENV["ADMINS"].split(",")
       fake_email = case role
                    when "admin"
                      "169reentryadmin@berkeley.edu"
@@ -61,7 +61,7 @@ class SessionsController < ApplicationController
       user.save!
       session[:current_user_id] = user.id
   
-      redirect_to root_path, flash: { success: "Logged in as #{role.capitalize} mock user." }
+      redirect_to root_path, flash: { success: "Email = #{fake_email} Admins = #{admins}" }
       return
     end
 

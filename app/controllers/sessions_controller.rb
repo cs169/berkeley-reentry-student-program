@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
     if ENV["MOCK_CANVAS_LOGIN"] == "true"
       # Read the role from params (default to "student" if none)
       role = params[:mock_role] || "student"
-      flash: {success "Role is #{role}"}
+      flash: {success: "Role is #{role}"}
   
       fake_email = case role
                    when "admin"

@@ -46,7 +46,12 @@ class SessionsController < ApplicationController
                      "studentuser@berkeley.edu"
                    end
   
-      user = User.find_or_initialize_by(email: fake_email)
+      existing_user = User.where(email: fake_email).first
+      if existing_user.present?
+        session[:current_user_id] = existing_user.id
+        redirect_to root_path, flash: { success: "Success! You've been logged-in!" }
+        return
+      end
 
       if user.new_record?
         user.first_name = role.capitalize

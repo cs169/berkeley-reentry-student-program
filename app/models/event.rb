@@ -17,4 +17,12 @@ class Event < ApplicationRecord
   def formatted_date
     date.strftime("%A, %B %d, %Y")
   end
+
+  def self.to_csv
+    require "csv"
+    CSV.generate(headers: true) do |csv|
+      csv << column_names
+      all.each { |event| csv << event.attributes.values_at(*column_names) }
+    end
+  end
 end

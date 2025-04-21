@@ -38,14 +38,14 @@ class SessionsController < ApplicationController
     if ENV["MOCK_CANVAS_LOGIN"] == "true"
       # Read the role from params (default to "student" if none)
       role = params[:mock_role] || "student"
-      
+
       fake_email = case role
                    when "admin"
                      "169reentryadmin@berkeley.edu"
                    else
                      "studentuser@berkeley.edu"
-                   end
-  
+      end
+
       user = User.find_or_initialize_by(email: fake_email)
 
       if user.new_record?
@@ -60,7 +60,7 @@ class SessionsController < ApplicationController
       user = set_user_permission(user, fake_email)
       user.save!
       session[:current_user_id] = user.id
-  
+
       redirect_to root_path, flash: { success: "Logged in as #{role.capitalize} mock user." }
       return
     end

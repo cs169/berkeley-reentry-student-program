@@ -52,7 +52,9 @@ class SessionsController < ApplicationController
         user.first_name = role.capitalize
         user.last_name = "Mock"
         user.email = fake_email
-        user.sid = "12345678"
+        if role == "student"
+          user.sid = "12345678"
+        end
       end
 
       user = set_user_permission(user, fake_email)

@@ -18,11 +18,11 @@
             Login with Canvas
             <% end %>
             <% if ENV["MOCK_CANVAS_LOGIN"] == "true" %>
-                <%= button_to canvas_callback_path(mock_role: "admin"), method: :post, class: "btn btn-secondary btn-lg" do %>
+                <%= button_to canvas_callback_path(mock_role: "admin"), method: :get, class: "btn btn-secondary btn-lg" do %>
                     👑 Mock Admin Login
                 <% end %>
 
-                <%= button_to canvas_callback_path(mock_role: "student"), method: :post, class: "btn btn-secondary btn-lg" do %>
+                <%= button_to canvas_callback_path(mock_role: "student"), method: :get, class: "btn btn-secondary btn-lg" do %>
                     🎓 Mock Student Login
                 <% end %>
             <% end %>

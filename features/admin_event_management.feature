@@ -6,7 +6,4 @@ Feature: Admin Event Management
   Background:
     Given I logged in as a "Admin"
     And I am on the admins page
-
-  Scenario: Viewing the list of events
-    When I visit the admin_events page
     

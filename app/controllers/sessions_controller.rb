@@ -47,6 +47,15 @@ class SessionsController < ApplicationController
                    end
   
       user = User.find_or_initialize_by(email: fake_email)
+
+      if user.new_record?
+        user.first_name = role.capitalize
+        user.last_name = "Mock"
+        user.email = fake_email
+        user.sid = "12345678" # ✅ add a fake Student ID that is 8 digits
+        user.save!
+      end
+
       user = set_user_permission(user, fake_email)
       user.save! if user.new_record?
       session[:current_user_id] = user.id
@@ -54,6 +63,7 @@ class SessionsController < ApplicationController
       redirect_to root_path, flash: { success: "Logged in as #{role.capitalize} mock user." }
       return
     end
+    
     if params[:error].present? || params[:code].blank?
       redirect_to root_path, alert: "Authentication failed. Please try again."
       return

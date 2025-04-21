@@ -38,8 +38,7 @@ class SessionsController < ApplicationController
     if ENV["MOCK_CANVAS_LOGIN"] == "true"
       # Read the role from params (default to "student" if none)
       role = params[:mock_role] || "student"
-      redirect_to root_path, flash: { success: "Role = #{role}" }
-      return
+
       fake_email = case role
                    when "admin"
                      "169reentryadmin@berkeley.edu"
@@ -53,7 +52,7 @@ class SessionsController < ApplicationController
         user.first_name = role.capitalize
         user.last_name = "Mock"
         user.email = fake_email
-        user.sid = "12345678" # ✅ add a fake Student ID that is 8 digits
+        user.sid = "12345678"
       end
 
       user = set_user_permission(user, fake_email)

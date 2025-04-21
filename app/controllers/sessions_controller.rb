@@ -36,8 +36,10 @@ class SessionsController < ApplicationController
   # Canvas authentication
   def canvas_callback
     if ENV["MOCK_CANVAS_LOGIN"] == "true"
+      # Read the role from params (default to "student" if none)
       role = params[:mock_role] || "student"
-  
+      redirect_to root_path, flash: { success: "Role = #{role}" }
+      return
       fake_email = case role
                    when "admin"
                      "169reentryadmin@berkeley.edu"
@@ -45,16 +47,14 @@ class SessionsController < ApplicationController
                      "studentuser@berkeley.edu"
                    end
   
-      user = User.find_or_initialize_by(email: fake_email).first
-      if user.present?
-        session[:current_user_id] = user.id
-        redirect_to root_path, flash: { success: "Success! You've been logged-in as #{fake_email}!" }
-        return
-      end
+      user = User.find_or_initialize_by(email: fake_email)
 
-      user.first_name = role.capitalize
-      user.last_name = "Mock"
-      user.sid = "12345678" # ✅ add a fake Student ID that is 8 digits
+      if user.new_record?
+        user.first_name = role.capitalize
+        user.last_name = "Mock"
+        user.email = fake_email
+        user.sid = "12345678" # ✅ add a fake Student ID that is 8 digits
+      end
 
       user = set_user_permission(user, fake_email)
       user.save!

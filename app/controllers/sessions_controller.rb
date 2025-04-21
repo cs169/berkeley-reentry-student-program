@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
   
       fake_email = case role
                    when "admin"
-                     "adminuser@berkeley.edu"
+                     "google_admin@berkeley.edu"
                    else
                      "studentuser@berkeley.edu"
                    end
@@ -53,17 +53,16 @@ class SessionsController < ApplicationController
         user.last_name = "Mock"
         user.email = fake_email
         user.sid = "12345678" # ✅ add a fake Student ID that is 8 digits
-        user.save!
       end
 
       user = set_user_permission(user, fake_email)
-      user.save! if user.new_record?
+      user.save!
       session[:current_user_id] = user.id
   
       redirect_to root_path, flash: { success: "Logged in as #{role.capitalize} mock user." }
       return
     end
-    
+
     if params[:error].present? || params[:code].blank?
       redirect_to root_path, alert: "Authentication failed. Please try again."
       return

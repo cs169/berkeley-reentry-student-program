@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get "admins", to: "admins#index"
   get "view_checkin_records", to: "admins#view_checkin_records"
 
+  # event routes
   namespace :admin do
     resources :events
   end
@@ -39,9 +40,18 @@ Rails.application.routes.draw do
   get "/advisors/new", to: "advisors#new"
   post "/advisors", to: "advisors#create"
   get "/advisors/:id/edit", to: "advisors#edit", as: "edit_advisor"
-  patch "/advisors/:id", to: "advisors#update"
+  patch "/advisors/:id", to: "advisors#update", as: "advisor"
   delete "/advisors/:id", to: "advisors#destroy", as: "delete_advisor"
   get "/advisors/:id", to: "advisors#destroy"
+
+  # Course management routes
+  get "manage_courses", to: "admins#manage_courses", as: "manage_courses"
+  get "courses/new", to: "admins#new_course", as: "new_course"
+  post "courses", to: "admins#create_course", as: "create_course"
+  get "courses/:id/edit", to: "admins#edit_course", as: "edit_course"
+  patch "courses/:id", to: "admins#update_course", as: "update_course"
+  delete "courses/:id", to: "admins#destroy_course", as: "destroy_course"
+  get "courses/export", to: "admins#export_courses", as: "export_courses"
 
   # user routes
   patch "user", to: "users#update"

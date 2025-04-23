@@ -26,7 +26,7 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
 
 ## First-Time Setup Instructions
 
-1. Fork & clone the repository locally!
+1. Clone the repository locally and then make your own branch!!
 2. Install Ruby version 3.0.3, and switch to that version using `rvm use 3.0.3`
 3. You must have PostgreSQL installed locally to run the rails server. 
     - **For Mac**:
@@ -48,7 +48,7 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
       - At the bottom of the text file, add the following: `export ADMINS=string` & `export STAFF=string` where string is a comma-separated list of Berkeley email addresses (these do not have to be real); i.e. `person@berkeley.edu,person2@berkeley.edu`
       Additionally, add `export GOOGLE_CLIENT_ID=some_value` & `export GOOGLE_CLIENT_SECRET=some_value` where some_value is some arbitrary string (these do not need to be valid to run the app locally, since google authentication is stubbed-out unless it is run on production).
     - **For Windows**: follow [these instructions](https://devcenter.heroku.com/articles/creating-apps) to set environment variables 
-      - Set  `ADMINS` & `STAFF`, where the value of each is a comma-separated list of Berkeley email addresses (these do not have to be real); i.e.                 `person@berkeley.edu,person2@berkeley.edu`.
+      - Set  `ADMINS` & `STAFF`, where the value of each is a comma-separated list of Berkeley email addresses (these do not have to be real); i.e. `person@berkeley.edu,person2@berkeley.edu`.
       - Set `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET` to some arbitrary string (these do not need to be valid to run the app locally, since google authentication is stubbed-out unless it is run on production).
   - **For Production**: Add the `ADMIN`, `STAFF`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET` environment variables to Heroku via the command line (assuming there is a Heroku app set up in your directory) 
     - Follow [these instructions](https://developers.google.com/adwords/api/docs/guides/authentication#webapp) (web app) to obtain a google client secret & a google client ID. For the callback URL, use https://*your-app-name*.herokuapp.com/auth/google_oauth2/

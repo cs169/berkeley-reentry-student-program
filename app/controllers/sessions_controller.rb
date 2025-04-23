@@ -35,6 +35,36 @@ class SessionsController < ApplicationController
 
   # Canvas authentication
   def canvas_callback
+    if ENV["MOCK_CANVAS_LOGIN"] == "true"
+      # Read the role from params (default to "student" if none)
+      role = params[:mock_role] || "student"
+
+      fake_email = case role
+                   when "admin"
+                     "169reentryadmin@berkeley.edu"
+                   else
+                     "studentuser@berkeley.edu"
+      end
+
+      user = User.find_or_initialize_by(email: fake_email)
+
+      if user.new_record?
+        user.first_name = role.capitalize
+        user.last_name = "Mock"
+        user.email = fake_email
+        if role == "student"
+          user.sid = "12345678"
+        end
+      end
+
+      user = set_user_permission(user, fake_email)
+      user.save!
+      session[:current_user_id] = user.id
+
+      redirect_to root_path, flash: { success: "Logged in as #{role.capitalize} mock user." }
+      return
+    end
+
     if params[:error].present? || params[:code].blank?
       redirect_to root_path, alert: "Authentication failed. Please try again."
       return

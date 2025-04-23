@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
-  validates :title, :date, :start_time, :location, :description, presence: true
+  validates :title, :date, :start_time, :location, :description, presence: {message: "%{attribute} cannot be empty"}
 
   # Helper method for displaying formatted time range
   def formatted_time

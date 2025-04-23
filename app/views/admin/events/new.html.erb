@@ -15,19 +15,40 @@
 <div class="container mt-3">
   <%= form_with model: @event, url: admin_events_path, method: :post, local: true do |form| %>
     <div class="mb-3">
-      <%= form.label :title, class: 'form-label' %>
-      <%= form.text_field :title, class: 'form-control' %>
+      <%= form.label :title, class: 'form-label' do %>
+        Title <span style="color: red;">*</span>
+      <% end %>
+      <%= form.text_field :title, class: "form-control #{'field-error' if @event.errors[:title].any?}" %>
+      <% if @event.errors[:title].any? %>
+        <div class="field-error-message" role="alert">
+          ⚠️ <%= @event.errors[:title].first if @event.errors[:title].any? %>
+        </div>
+      <% end %>
     </div>
   
     <div class="mb-3 form-group">
-      <%= form.label :date %>
-      <%= form.date_field :date, class: 'form-control' %>
+      <%= form.label :date do %>
+        Date <span style="color: red;">*</span>
+      <% end %>
+      <%= form.date_field :date, class: "form-control #{'field-error' if @event.errors[:date].any?}" %>
+      <% if @event.errors[:date].any? %>
+        <div class="field-error-message" role="alert">
+          ⚠️ <%= @event.errors[:date].first if @event.errors[:date].any? %>
+        </div>
+      <% end %>
     </div>
   
     <div class="mb-3 form-group row">
       <div class="col-md-6">
-        <%= form.label :start_time %>
-        <%= form.time_field :start_time, class: 'form-control' %>
+        <%= form.label :start_time do %>
+          Start time <span style="color: red;">*</span>
+        <% end %>
+        <%= form.time_field :start_time, class: "form-control #{'field-error' if @event.errors[:start_time].any?}" %>
+        <% if @event.errors[:start_time].any? %>
+          <div class="field-error-message" role="alert">
+            ⚠️ <%= @event.errors[:start_time].first if @event.errors[:start_time].any? %>
+          </div>
+        <% end %>
       </div>
       <div class="col-md-6">
         <%= form.label :end_time %>
@@ -36,13 +57,27 @@
     </div>
   
     <div class="mb-3">
-      <%= form.label :location %>
-      <%= form.text_field :location, class: 'form-control' %>
+      <%= form.label :location do %>
+        Location <span style="color: red;">*</span>
+      <% end %>
+      <%= form.text_field :location, class: "form-control #{'field-error' if @event.errors[:location].any?}" %>
+      <% if @event.errors[:location].any? %>
+        <div class="field-error-message" role="alert">
+          ⚠️ <%= @event.errors[:location].first if @event.errors[:location].any? %>
+        </div>
+      <% end %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :description, class: 'form-label' %>
-      <%= form.text_area :description, class: 'form-control', rows: 3 %>
+      <%= form.label :description, class: 'form-label' do %>
+        Description <span style="color: red;">*</span>
+      <% end %>
+      <%= form.text_area :description, class: "form-control #{'field-error' if @event.errors[:description].any?}", rows: 3 %>
+      <% if @event.errors[:description].any? %>
+        <div class="field-error-message" role="alert">
+          ⚠️ <%= @event.errors[:description].first if @event.errors[:description].any? %>
+        </div>
+      <% end %>
     </div>
     
     <div class="mb-3">

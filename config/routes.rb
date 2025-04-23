@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   get "appointments", to: "appointments#advisors"
   # scholarships page
   get "scholarships/new", to: "admins#new", as: :new_scholarship
+  get "scholarships/export", to: "admins#export_scholarships", as: "export_scholarships"
   get "scholarships", to: "scholarships#index"
   get "scholarships/:id", to: "scholarships#show", as: :scholarship
-  get "edit_scholarships", to: "admins#edit_scholarships"
+  get "manage_scholarships", to: "admins#manage_scholarships", as: "manage_scholarships"
   post "scholarships", to: "admins#create", as: :create_scholarship
   get "scholarships/:id/edit", to: "admins#edit", as: :edit_scholarship
   patch "scholarships/:id", to: "admins#update", as: :update_scholarship

@@ -22,8 +22,9 @@ class AdminsController < ApplicationController
     @advisors = Advisor.all
   end
 
-  def edit_scholarships
+  def manage_scholarships
     @scholarships = Scholarship.all
+    render "admins/scholarships/manage"
   end
 
   def new
@@ -34,7 +35,7 @@ class AdminsController < ApplicationController
   def create
     @scholarship = Scholarship.new(scholarship_params)
     if @scholarship.save
-      redirect_to edit_scholarships_path, notice: "Scholarship was successfully created."
+      redirect_to manage_scholarships_path, notice: "Scholarship was successfully created."
     else
       render "admins/scholarships/new"
     end
@@ -48,7 +49,7 @@ class AdminsController < ApplicationController
   def update
     @scholarship = Scholarship.find(params[:id])
     if @scholarship.update(scholarship_params)
-      redirect_to edit_scholarships_path, notice: "Scholarship was successfully updated."
+      redirect_to manage_scholarships_path, notice: "Scholarship was successfully updated."
     else
       render "admins/scholarships/edit"
     end
@@ -57,16 +58,16 @@ class AdminsController < ApplicationController
   def destroy
     @scholarship = Scholarship.find(params[:id])
     @scholarship.destroy
-    redirect_to edit_scholarships_path, notice: "Scholarship was successfully deleted."
+    redirect_to manage_scholarships_path, notice: "Scholarship was successfully deleted."
   end
 
   def batch_delete
     scholarship_ids = params[:scholarship_ids]
     if scholarship_ids.present?
       Scholarship.where(id: scholarship_ids).destroy_all
-      redirect_to edit_scholarships_path, notice: "Selected scholarships were successfully deleted."
+      redirect_to manage_scholarships_path, notice: "Selected scholarships were successfully deleted."
     else
-      redirect_to edit_scholarships_path, alert: "No scholarships were selected for deletion."
+      redirect_to manage_scholarships_path, alert: "No scholarships were selected for deletion."
     end
   end
 
@@ -113,6 +114,13 @@ class AdminsController < ApplicationController
     @courses = Course.all
     respond_to do |format|
       format.csv { send_data Course.to_csv, filename: "courses-#{Date.today}.csv" }
+    end
+  end
+
+  def export_scholarships
+    @scholarships = Scholarship.all
+    respond_to do |format|
+      format.csv { send_data Scholarship.to_csv, filename: "scholarships-#{Date.today}.csv" }
     end
   end
 

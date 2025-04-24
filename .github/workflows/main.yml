@@ -39,6 +39,20 @@ jobs:
         sudo service postgresql start
         sudo -u postgres createuser --superuser "$USER"
 
+    - name: Set up NodeJS for JavaScript dependencies (required for ActionText)
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    
+    - name: Install Yarn
+      run: |
+        npm install -g yarn
+
+    - name: Setup ActionText and ActiveStorage
+      run: |
+        bundle exec rails action_text:install
+        bundle exec rake assets:precompile
+
     - name: setup the database
       run: |
         bundle exec rake db:create db:migrate

@@ -75,7 +75,7 @@ RSpec.describe Event, type: :model do
         csv_output = Event.to_csv
         rows = csv_output.split("\n")
         expect(rows.length).to eq(1)
-        expect(rows.first).to include("id", "title", "date", "start_time", "end_time", "location", "description")
+        expect(rows.first).to include("title", "date", "start_time", "end_time", "location", "description")
       end
     end
 
@@ -93,8 +93,8 @@ RSpec.describe Event, type: :model do
         rows = csv_output.split("\n")
 
         expect(rows.length).to eq(2)
-        expect(rows.first).to include("id", "title", "date", "start_time", "end_time", "location", "description")
-        expect(rows.last).to include(event.id.to_s, event.title, event.date.to_s, event.start_time.strftime("%H:%M:%S"), event.location, event.description)
+        expect(rows.first).to include("title", "date", "start_time", "end_time", "location", "description")
+        expect(rows.last).to include(event.title, event.date.to_s, event.start_time.strftime("%H:%M:%S"), event.location, event.description)
       end
     end
 
@@ -103,7 +103,7 @@ RSpec.describe Event, type: :model do
         event1 = Event.create!(
           title: "RSP Gala",
           date: Date.today,
-          start_time: Time.now,
+          start_time: Time.now + 2.hour,
           location: "Main Hall",
           description: "Fun social night event to network with other re-entry students"
         )
@@ -120,9 +120,9 @@ RSpec.describe Event, type: :model do
         csv_output = Event.to_csv
         rows = csv_output.split("\n")
         expect(rows.length).to eq(3)
-        expect(rows.first).to include("id", "title", "date", "start_time", "end_time", "location", "description")
-        expect(rows[1]).to include(event1.id.to_s, event1.title, event1.date.to_s, event1.start_time.strftime("%H:%M:%S"), event1.location, event1.description)
-        expect(rows[2]).to include(event2.id.to_s, event2.title, event2.date.to_s, event2.start_time.strftime("%H:%M:%S"), event2.end_time.strftime("%H:%M:%S"), event2.location, event2.description)
+        expect(rows.first).to include("title", "date", "start_time", "end_time", "location", "description")
+        expect(rows[2]).to include(event1.title, event1.date.to_s, event1.start_time.strftime("%H:%M:%S"), event1.location, event1.description)
+        expect(rows[1]).to include(event2.title, event2.date.to_s, event2.start_time.strftime("%H:%M:%S"), event2.end_time.strftime("%H:%M:%S"), event2.location, event2.description)
       end
     end
   end

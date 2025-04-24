@@ -21,8 +21,11 @@ class Event < ApplicationRecord
   def self.to_csv
     require "csv"
     CSV.generate(headers: true) do |csv|
-      csv << column_names
-      all.each { |event| csv << event.attributes.values_at(*column_names) }
+      columns = %w[title date start_time end_time location description]
+      csv << columns
+      all.order(date: :desc).each do |event|
+        csv << event.attributes.values_at(*columns)
+      end
     end
   end
 end

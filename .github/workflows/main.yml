@@ -48,16 +48,6 @@ jobs:
       run: |
         npm install -g yarn
 
-    - name: Setup controllers directory and files
-      run: |
-        mkdir -p app/javascript/controllers
-        # 创建空的application.js文件
-        echo "import { Application } from \"@hotwired/stimulus\"; const application = Application.start(); application.debug = false; window.Stimulus = application; export { application };" > app/javascript/controllers/application.js
-        # 创建空的index.js文件
-        echo "export {}" > app/javascript/controllers/index.js
-        # 创建空的hello_controller.js文件
-        echo "import { Controller } from \"@hotwired/stimulus\"; export default class extends Controller {}" > app/javascript/controllers/hello_controller.js
-
     - name: Setup ActionText and ActiveStorage
       run: |
         bundle exec rails action_text:install
@@ -83,3 +73,13 @@ jobs:
         ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
         ./cc-test-reporter upload-coverage --id ${{ secrets.CC_TEST_REPORTER_ID }}
         ./cc-test-reporter after-build --id ${{ secrets.CC_TEST_REPORTER_ID }}
+
+    - name: Set up JavaScript controllers
+      run: |
+        mkdir -p app/javascript/controllers
+        # Create empty application.js file
+        echo "import { Application } from \\"@hotwired/stimulus\\"; const application = Application.start(); application.debug = false; window.Stimulus = application; export { application };" > app/javascript/controllers/application.js
+        # Create empty index.js file
+        echo "export {}" > app/javascript/controllers/index.js
+        # Create empty hello_controller.js file
+        echo "import { Controller } from \\"@hotwired/stimulus\\"; export default class extends Controller {}" > app/javascript/controllers/hello_controller.js

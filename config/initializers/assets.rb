@@ -13,5 +13,5 @@ Rails.application.config.assets.version = "1.0"
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
-# 预编译Importmap所需的JavaScript文件
+# Precompile JavaScript files required by Importmap
 Rails.application.config.assets.precompile += %w( controllers/index.js controllers/application.js )

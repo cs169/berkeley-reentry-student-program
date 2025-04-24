@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# 统一常量定义以避免重复定义和警告
+# Define constants centrally to avoid redefinition and warnings
 module TestConstants
-  # 学生测试凭据
+  # Student test credentials
   STUDENT_CREDENTIALS = {
     "provider" => "google_oauth2",
     "uid" => "1000000000",
@@ -19,7 +19,7 @@ module TestConstants
   }.freeze
 end
 
-# 在RSpec配置中包含此模块，使常量全局可用
+# Include this module in RSpec configuration to make constants globally available
 RSpec.configure do |config|
   config.include TestConstants
 end

@@ -9,8 +9,8 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # set testing ENV variables
-  ENV["ADMINS"] = "google_admin@berkeley.edu"
-  ENV["STAFF"] = "google_staff@berkeley.edu"
+  Rails.application.credentials[:ADMINS] = "google_admin@berkeley.edu"
+  Rails.application.credentials[:STAFF] = "google_staff@berkeley.edu"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.

@@ -95,7 +95,20 @@ New Relic APM is a monitoring service that monitors your apps performance. You c
 
 ## Canvas/Bcourse Authentication
 
-The app relies on Canvas/Bcourse to authenticate users. If you are testing the authentication in a sandbox environment, you must requests access to the sandbox environment to be able to authenticate.
+The app relies on Canvas/Bcourse to authenticate users. If you are testing the authentication in a sandbox Canvas environment, you must have access to the sandbox environment to be able to authenticate. Request access to the sandbox environment from the professors.
+
+**Authentication**
+
+The Canvas URL and redirect URI are stored in the `config/credentials.yml.enc` file. If you click on the `Login with Canvas` button on the homepage and cancel the authentication, you will be redirected to the redirect URI stored in the `config/credentials.yml.enc` file. **For local testing, use the mock login instead and do not use the `Login with Canvas` button.**
+
+**Mock Login/Authentication**
+
+To make the mock authentication for Canvas visible and usable, add the following to your terminal profile to create a local environment variable:
+- `export MOCK_CANVAS_LOGIN=true`
+
+Setting the environment variable to false will disable the mock login. **Be sure to not set this environment variable to true in the production environment.**
+
+
 
 ## Credit
 Spring 2025

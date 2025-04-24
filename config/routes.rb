@@ -63,6 +63,14 @@ Rails.application.routes.draw do
   get "user/profile/new", to: "users#profile_new", as: "user_profile_new"
   patch "user/profile/update", to: "users#profile_update", as: "user_profile_update"
   get "user/profile/edit", to: "users#profile_edit", as: "user_profile_edit"
+  get "manage_user_roles", to: "admins#manage_user_roles", as: "manage_user_roles"
+  get "user/:id/role_edit", to: "users#edit_user_role", as: "edit_user_role"
+
+  resources :users do
+    member do
+      patch :update_user_role
+    end
+  end
 
   # Routes for Google authentication
   get "auth/google_oauth2/callback", to: "sessions#google_auth", as: "google_login"

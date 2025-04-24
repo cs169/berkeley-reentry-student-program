@@ -35,6 +35,36 @@ class SessionsController < ApplicationController
 
   # Canvas authentication
   def canvas_callback
+    if ENV["MOCK_CANVAS_LOGIN"] == "true"
+      # Read the role from params (default to "student" if none)
+      role = params[:mock_role] || "student"
+
+      fake_email = case role
+                   when "admin"
+                     "169reentryadmin@berkeley.edu"
+                   else
+                     "studentuser@berkeley.edu"
+      end
+
+      user = User.find_or_initialize_by(email: fake_email)
+
+      if user.new_record?
+        user.first_name = role.capitalize
+        user.last_name = "Mock"
+        user.email = fake_email
+        if role == "student"
+          user.sid = "12345678"
+        end
+      end
+
+      user = set_user_permission(user, fake_email)
+      user.save!
+      session[:current_user_id] = user.id
+
+      redirect_to root_path, flash: { success: "Logged in as #{role.capitalize} mock user." }
+      return
+    end
+
     if params[:error].present? || params[:code].blank?
       redirect_to root_path, alert: "Authentication failed. Please try again."
       return
@@ -42,7 +72,7 @@ class SessionsController < ApplicationController
 
     access_token = get_access_token(params[:code])
 
-    response = Faraday.get("#{ENV["CANVAS_URL"]}/api/v1/users/self?") do |req|
+    response = Faraday.get("#{Rails.application.credentials[:CANVAS_URL]}/api/v1/users/self?") do |req|
       req.headers["Authorization"] = "Bearer #{access_token.token}"
     end
 
@@ -69,9 +99,9 @@ class SessionsController < ApplicationController
 
   def get_access_token(code)
     client = OAuth2::Client.new(
-      ENV["CANVAS_CLIENT_ID"],
-      ENV["CANVAS_CLIENT_SECRET"],
-      site: ENV["CANVAS_URL"],
+      Rails.application.credentials[:CANVAS_CLIENT_ID],
+      Rails.application.credentials[:CANVAS_CLIENT_SECRET],
+      site: Rails.application.credentials[:CANVAS_URL],
       token_url: "/login/oauth2/token"
     )
     client.auth_code.get_token(code, redirect_uri: :canvas_callback)
@@ -98,8 +128,8 @@ class SessionsController < ApplicationController
 
   def set_user_permission(user, email)
     # Get the official admins
-    admins = ENV["ADMINS"].split(",")
-    staff = ENV["STAFF"].split(",")
+    admins = Rails.application.credentials[:ADMINS].split(",")
+    staff = Rails.application.credentials[:STAFF].split(",")
     return nil if admins.blank? || staff.blank?
 
     user.is_admin = admins.include? email

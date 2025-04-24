@@ -47,6 +47,19 @@ class UsersController < ApplicationController
     @user = Student.find_by_id(session[:current_user_id])
   end
 
+  def edit_user_role
+    @user = User.find(params[:id])
+  end
+
+  def update_user_role
+    @user = User.find(params[:id])
+    if @user.update(user_role_params)
+      redirect_to manage_user_roles_path, flash: { success: "User role updated successfully." }
+    else
+      redirect_to manage_user_roles_path, flash: { error: "Failed to update user role." }
+    end
+  end
+
   private
   def require_login
     redirect_to root_path, flash: { error: "Only students have access to profiles." } unless
@@ -59,5 +72,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :sid)
+  end
+
+  def user_role_params
+    params.require(:user).permit(:first_name, :last_name, :email, :sid, :is_admin, :is_advisor, :is_student)
   end
 end

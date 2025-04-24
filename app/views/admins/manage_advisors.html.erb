@@ -9,9 +9,6 @@
     </div>
     <h1 class="display-5 fw-bold" align="center" style="color: #003262">Manage Advisors</h1>
     <br>
-    <div class="mb-3">
-      <%= link_to "Add New Advisor", advisors_new_path, class: "btn btn-success mb-3" %>
-    </div>
     <table id="advisors-table" class="display" style="width:100%">
       <thead>
         <tr>
@@ -38,7 +35,13 @@
         <% end %>
       </tbody>
     </table>
+  
+    <div class="d-flex justify-content-center mt-4 mb-3">
+        <%= link_to "Back to Admin Dashboard", admins_path, class: "btn btn-secondary" %>
+        <%= link_to "Add New Advisor", advisors_new_path, class: "btn btn-success mb-3" %>
+    </div>
   </div>
+      
 
   <%= javascript_include_tag 'https://code.jquery.com/jquery-3.6.0.min.js' %>
   <%= javascript_include_tag 'https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js' %>

@@ -27,6 +27,10 @@ class AdminsController < ApplicationController
     render "admins/scholarships/manage"
   end
 
+  def manage_user_roles
+    @users = User.all
+  end
+
   def new
     @scholarship = Scholarship.new
     render "admins/scholarships/new"

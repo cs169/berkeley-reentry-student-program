@@ -12,22 +12,29 @@ The Berkeley ReEntry Student Program is an application developed by UC Berkeley'
 ## Project Status
 **Working**
 - Community space check-in
-
-**In Development**
 - Appointments
 - Scholarships
 - Courses
+- Events
 
 ## Source/Golden Repo
 This repo is forked from https://github.com/saasbook/berkeley-reentry-student-program
 
 ## Heroku Deployment
+
+### Staging
 https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
+### Production
+https://reentry-student-program-b0fde1ef8035.herokuapp.com/
+
 
 ## First-Time Setup Instructions
 
 1. Clone the repository locally and then make your own branch!!
-2. Install Ruby version 3.0.3, and switch to that version using `rvm use 3.0.3`
+2. Install Ruby version 3.2.7 and switch to that version
+    - **For rvm**:
+      - `rvm install 3.2.7`
+      - `rvm use 3.2.7`
 3. You must have PostgreSQL installed locally to run the rails server. 
     - **For Mac**:
       - Install PostgreSQL: `brew install postgresql`
@@ -38,8 +45,11 @@ https://sp25-03-reentry-181cb67be4ca.herokuapp.com/
     - **For Linux**:
       - Install PostgreSQL: `sudo apt install postgresql postgresql-contrib`
       - Start PostgreSQL server: `sudo service postgresql start`
-4. Run `bundle install --without production`
-5. Run `rake db:create && rake db:schema:load && rake db:migrate && rake db:seed`
+4. Install the dependencies using bundle
+    - `bundle config set --local without 'production'`
+    - `bundle install`
+5. Setup the database 
+    - `rake db:create && rake db:schema:load && rake db:migrate && rake db:seed`
 6. Follow [these instructions](https://devcenter.heroku.com/articles/creating-apps) to create & setup a new Heroku app on the CLI
 7. Our code requires 4 environment variables to work correctly in production & local environments. 
   - **Local Development**: You must set a non-empty string for the environment variables `ADMIN`, `STAFF`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET`

@@ -10,6 +10,8 @@ Rails.application.configure do
     actiontext.js
     controllers/index.js
     controllers/application.js
+    controllers/hello_controller.js
+    controllers/**/*.js
   )
 end
 

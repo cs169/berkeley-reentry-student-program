@@ -1,7 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
+// Stimulus控制器
 export default class extends Controller {
   connect() {
-    this.element.textContent = "Hello World!"
+    console.log("Hello controller connected")
   }
 }

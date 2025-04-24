@@ -65,5 +65,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # Include session helpers for request specs
-  config.include SessionHelpers, type: :request
+  # config.include SessionHelpers, type: :request # Removed as it's already in spec/support/session_helpers.rb
 end

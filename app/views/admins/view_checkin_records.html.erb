@@ -1,45 +1,74 @@
-<div class="container">
-  <div class="<%=flash.empty? ? 'px-4 py-5 my-2' : 'px-4 pb-5 mb-5' %> text-center">
-    <%= render "shared/flash_messages" %>
-    <h1 class=" display-5 fw-bold">Check-in Records</h1>
-    <table class="table table-striped col-md-12" id="checkin_records">
+<html lang="en">
+<head>
+  <%= stylesheet_link_tag 'https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css' %>
+  <%= stylesheet_link_tag 'https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css' %>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="<%=flash.empty? ? 'px-4 py-5 my-2' : 'px-4 pb-5 mb-5' %> text-center">
+      <%= render "shared/flash_messages" %>
+    </div>
+    <h1 class="display-5 fw-bold" align="center" style="color: #003262">Check-in Records</h1>
+    <br>
+    <table id="checkins-table" class="display" style="width:100%">
       <thead>
         <tr>
           <th>Time</th>
-          <th>Last Name</th>
-          <th>First Name</th>
+          <th>Name</th>
           <th>SID</th>
+          <th>Email</th>
           <th>Reason</th>
         </tr>
       </thead>
       <tbody>
         <% @checkin_records.each do |record| %>
           <tr>
-            <td>
-              <%= record.time.strftime("%Y-%m-%d %H:%M") %>
-            </td>
-            <td>
-              <%= record.student.last_name %>
-            </td>
-            <td>
-              <%= record.student.first_name %>
-            </td>
-            <td>
-              <%= record.student.sid %>
-            </td>
-            <td>
-              <%= record.reason %>
-            </td>
+            <td><%= record.time.strftime("%Y-%m-%d %H:%M") %></td>
+            <td><%= record.student.name %></td>
+            <td><%= record.student.sid %></td>
+            <td><%= record.student.email %></td>
+            <td><%= record.reason %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <div class = "move-page">
-      <%= link_to "previous page".html_safe, view_checkin_records_path(page: params[:page].to_i - 1),
-      class: "btn btn-secondary mt-1 btn-lg px-4 gap-3 #{params[:page].to_i <= 1 ? 'disabled' : nil}" %>
-      <%= link_to "next page".html_safe, view_checkin_records_path(page: params[:page].to_i + 1), 
-        class: "btn btn-secondary mt-1 btn-lg px-4 gap-3 text-right #{!@has_next_page ? 'disabled' : nil}" %>
-    </div>
-    <%= link_to "back to admin dashboard".html_safe, admins_path, class: "btn btn-secondary mt-1 btn-lg px-4 gap-3" %>
   </div>
-</div>
+  <div class="mt-4">
+    <div class="d-flex justify-content-center gap-3">
+      <%= link_to "Back to Admin Dashboard".html_safe, admins_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.6.0.min.js' %>
+  <%= javascript_include_tag 'https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js' %>
+  <%= javascript_include_tag 'https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js' %>
+  <%= javascript_include_tag 'https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js' %>
+  <script>
+    $(document).ready(function() {
+      $('#checkins-table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          {
+            extend: 'collection',
+            text: 'Export',
+            className: 'btn btn-primary',
+            buttons: [
+              {
+                extend: 'csvHtml5',
+                text: 'Export to CSV',
+                className: 'dropdown-item'
+              },
+              {
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                className: 'dropdown-item'
+              }
+            ]
+          }
+        ]
+      });
+    });
+  </script>
+</body>
+</html>

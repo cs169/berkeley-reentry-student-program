@@ -18,7 +18,7 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.2.7
-        bundler-cache: true
+        # bundler-cache: true # Temporarily disabled for debugging
 
     - name: Set up Code Climate test-reporter
       run: |
@@ -73,13 +73,3 @@ jobs:
         ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
         ./cc-test-reporter upload-coverage --id ${{ secrets.CC_TEST_REPORTER_ID }}
         ./cc-test-reporter after-build --id ${{ secrets.CC_TEST_REPORTER_ID }}
-
-    - name: Set up JavaScript controllers
-      run: |
-        mkdir -p app/javascript/controllers
-        # Create empty application.js file
-        echo "import { Application } from \\"@hotwired/stimulus\\"; const application = Application.start(); application.debug = false; window.Stimulus = application; export { application };" > app/javascript/controllers/application.js
-        # Create empty index.js file
-        echo "export {}" > app/javascript/controllers/index.js
-        # Create empty hello_controller.js file
-        echo "import { Controller } from \\"@hotwired/stimulus\\"; export default class extends Controller {}" > app/javascript/controllers/hello_controller.js

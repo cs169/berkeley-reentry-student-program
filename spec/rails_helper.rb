@@ -71,4 +71,7 @@ RSpec.configure do |config|
   config.before(:each, type: :controller) do
     @request.env["HTTPS"] = "on"
   end
+
+  # Include session helpers for request specs
+  config.include SessionHelpers, type: :request # Re-enabled for debugging CI issue
 end

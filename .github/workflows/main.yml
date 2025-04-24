@@ -55,7 +55,8 @@ jobs:
 
     - name: setup the database
       run: |
-        bundle exec rake db:create db:migrate
+        bundle exec rake db:create RAILS_ENV=test
+        bundle exec rake db:schema:load RAILS_ENV=test
 
     - name: run Cucumber tests #and capture coverage
       run: |

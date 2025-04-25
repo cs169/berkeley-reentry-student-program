@@ -16,7 +16,7 @@ class LoginController < ApplicationController
       client_id: Rails.application.credentials[:CANVAS_CLIENT_ID],
       response_type: "code",
       redirect_uri: redirect_uri,
-      scope: "url:GET|/api/v1/users/self"
+      scope: "url:GET|/api/v1/users/:id"
     }
 
     redirect_to "#{Rails.application.credentials[:CANVAS_URL]}/login/oauth2/auth?#{params.to_query}", allow_other_host: true

@@ -5,9 +5,9 @@ require "rails_helper"
 
 RSpec.describe "Admins", type: :request do
   # Helper method defined locally for debugging CI issues
-  # def sign_in_as(user)
-  #   post "/__test_login", params: { id: user.id }
-  # end
+  def sign_in_as(user)
+    post "/__test_login", params: { id: user.id }
+  end
 
   describe "Access control for admin dashboard" do
     it "blocks a student from accessing the admin dashboard" do

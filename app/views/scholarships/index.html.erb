@@ -18,7 +18,7 @@
         <h3 class="card-header"><%= scholarship.name %></h3>
         <div class="card-body">
           <div class="card-text">
-            <%= simple_format(scholarship.description) %>
+            <%= scholarship.description %>
 
             <%# Display the status text and link %>
             <% if scholarship.application_url.present? %>

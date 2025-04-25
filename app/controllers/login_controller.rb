@@ -7,14 +7,15 @@ class LoginController < ApplicationController
   end
 
   def canvas_login
-    unless Rails.application.credentials[:CANVAS_CLIENT_ID] && Rails.application.credentials[:CANVAS_URL] && Rails.application.credentials[:CANVAS_REDIRECT_URI]
+    unless Rails.application.credentials[:CANVAS_CLIENT_ID] && Rails.application.credentials[:CANVAS_URL]
       redirect_to root_path, flash: { error: "Canvas configuration is missing" }
       return
     end
+    redirect_uri = "#{request.protocol}#{request.host_with_port}/auth/canvas/callback"
     params = {
       client_id: Rails.application.credentials[:CANVAS_CLIENT_ID],
       response_type: "code",
-      redirect_uri: Rails.application.credentials[:CANVAS_REDIRECT_URI],
+      redirect_uri: redirect_uri,
       scope: "url:GET|/api/v1/users/self"
     }
 

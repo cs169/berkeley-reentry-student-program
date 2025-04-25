@@ -1,0 +1,115 @@
+// Styles for Events
+
+// Berkeley blue color
+$berkeley-blue: #003262;
+$berkeley-gold: #FDB515;
+$light-gray: #f8f9fa;
+
+// Event card styling
+.event-list {
+  .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+  
+  .card-title {
+    font-weight: 600;
+    color: $berkeley-blue;
+    margin-bottom: 1rem;
+  }
+  
+  .event-details {
+    i {
+      width: 20px;
+      margin-right: 8px;
+      text-align: center;
+      color: $berkeley-blue;
+    }
+    
+    .fw-bold {
+      color: #333;
+    }
+  }
+}
+
+// Flyer styling
+.flyer-container {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: $light-gray;
+  transition: transform 0.2s;
+  padding: 0.5rem;
+  border-radius: 5px;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+// Header styling
+.text-berkeley-blue {
+  color: $berkeley-blue;
+}
+
+h1.event-header, h2.event-header {
+  font-family: 'Poppins', sans-serif;
+  color: $berkeley-blue;
+  font-weight: 600;
+}
+
+// Accessibility helpers
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Button styling specific to events
+.event-btn-primary {
+  background-color: $berkeley-blue;
+  border-color: $berkeley-blue;
+  
+  &:hover {
+    background-color: darken($berkeley-blue, 10%);
+    border-color: darken($berkeley-blue, 10%);
+  }
+}
+
+.event-btn-outline {
+  color: $berkeley-blue;
+  border-color: $berkeley-blue;
+  
+  &:hover {
+    background-color: $berkeley-blue;
+    color: white;
+  }
+}
+
+// Past events styling
+.past-event {
+  .card-title {
+    color: #6c757d;
+  }
+  
+  img {
+    opacity: 0.8;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .event-list {
+    .flyer-container {
+      margin-top: 1rem;
+    }
+  }
+} 

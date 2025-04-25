@@ -24,7 +24,9 @@ class Admin::EventsController < ApplicationController
   end
 
   def edit
-    # event set by set_event
+    # Format time values to remove seconds for display
+    @event.start_time = @event.start_time.change(sec: 0) if @event.start_time
+    @event.end_time = @event.end_time.change(sec: 0) if @event.end_time
   end
 
   def show
@@ -60,7 +62,7 @@ class Admin::EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :date, :start_time, :end_time, :location, :description, :flyer) # may change later, not sure what we want to include
+    params.require(:event).permit(:title, :date, :start_time, :end_time, :location, :description, :flyer)
   end
 
   def set_event

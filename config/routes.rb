@@ -81,4 +81,9 @@ Rails.application.routes.draw do
   # Routes for Canvas authentication
   post "login/canvas", to: "login#canvas_login", as: "canvas_login"
   get "auth/canvas/callback", to: "sessions#canvas_callback", as: "canvas_callback"
+
+  if Rails.env.test?
+    # Route for test helper sign_in_as
+    post "/__test_login", to: "sessions#create_for_test"
+  end
 end

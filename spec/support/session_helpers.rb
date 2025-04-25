@@ -8,6 +8,6 @@ module SessionHelpers
   end
 end
 
-RSpec.configure do |config|
-  config.include SessionHelpers, type: :request
-end
+# RSpec.configure do |config|
+#   config.include SessionHelpers, type: :request
+# end

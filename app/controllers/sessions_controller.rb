@@ -112,7 +112,16 @@ class SessionsController < ApplicationController
     redirect_to root_path, flash: { success: "You've been successfully logged-out!" }
   end
 
-
+  # Action for test helper sign_in_as
+  def create_for_test
+    if Rails.env.test? && params[:id].present?
+      user = User.find(params[:id])
+      session[:current_user_id] = user.id if user # Use the same session key as google_auth
+      head :ok # Respond with 200 OK, no content needed
+    else
+      head :forbidden # Or some other appropriate error
+    end
+  end
 
   private
   def user_first_login(user)

@@ -74,4 +74,5 @@ RSpec.configure do |config|
 
   # Include session helpers for request specs
   config.include SessionHelpers, type: :request # Re-enabled for debugging CI issue
+  puts "DEBUG: RSpec configured to include SessionHelpers for type: :request"
 end

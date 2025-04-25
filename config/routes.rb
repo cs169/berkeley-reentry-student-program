@@ -84,6 +84,6 @@ Rails.application.routes.draw do
 
   if Rails.env.test?
     # Route for test helper sign_in_as
-    post '/__test_login', to: 'sessions#create_for_test'
+    post "/__test_login", to: "sessions#create_for_test"
   end
 end

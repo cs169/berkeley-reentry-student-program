@@ -126,9 +126,8 @@ RSpec.describe AdvisorsController, type: :request do
   describe "GET #show" do
     it "assigns the requested advisor as @advisor" do
       pending "Implement the show page in the views"
-      fail
-      get "/advisors/#{advisor.id}"
-      expect(assigns(:advisor)).to eq(advisor)
+      # get "/advisors/#{advisor.id}"
+      # expect(assigns(:advisor)).to eq(advisor)
     end
   end
 end

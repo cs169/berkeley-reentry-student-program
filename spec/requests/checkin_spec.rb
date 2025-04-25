@@ -6,9 +6,9 @@ require "rails_helper"
 
 RSpec.describe "Checkin", type: :request do
   # Helper method defined locally for debugging CI issues
-  def sign_in_as(user)
-    post "/__test_login", params: { id: user.id }
-  end
+  # def sign_in_as(user)
+  #   post "/__test_login", params: { id: user.id }
+  # end
 
   let(:student)        { FactoryBot.create(:student) }
   let(:expected_time)  { DateTime.parse("2022-03-08T12:00:00-08:00") }

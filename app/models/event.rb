@@ -30,10 +30,9 @@ class Event < ApplicationRecord
   end
 
   private
-
   def end_time_after_start_time
     return unless end_time <= start_time
-    
+
     errors.add(:end_time, "must be after start time")
   end
 
@@ -41,14 +40,14 @@ class Event < ApplicationRecord
     return unless flyer.attached?
 
     # Validate file type
-    unless flyer.content_type.start_with?('image/')
-      errors.add(:flyer, 'must be an image file (JPEG, PNG, GIF, etc.)')
+    unless flyer.content_type.start_with?("image/")
+      errors.add(:flyer, "must be an image file (JPEG, PNG, GIF, etc.)")
       flyer.purge # Remove the invalid attachment
     end
 
     # Validate file size
     if flyer.blob.byte_size > 5.megabytes
-      errors.add(:flyer, 'is too large (maximum is 5MB)')
+      errors.add(:flyer, "is too large (maximum is 5MB)")
       flyer.purge # Remove the oversized attachment
     end
   end

@@ -26,7 +26,7 @@ gem "turbo-rails"
 gem "figaro"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-# gem "stimulus-rails"
+gem "stimulus-rails"
 # Bootstrap
 gem "bootstrap", "~> 5.0.0"
 # Use SCSS for stylesheets

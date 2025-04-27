@@ -37,7 +37,7 @@ Feature: Admin Scholarship Management
       | name                 | description            | status text | application_url        |
       | Existing Scholarship | Original description   | Active      | https://example.com/old |
     And I am on the manage scholarships page
-    When I click "Edit" for "Existing Scholarship" # Need a way to target the correct edit button
+    When I click "Edit" for "Existing Scholarship"
     Then I should be on the edit scholarship page for "Existing Scholarship"
     When I fill in "Name" with "Updated Scholarship Name"
     And I click "Update Scholarship"
@@ -52,12 +52,11 @@ Feature: Admin Scholarship Management
       | name                  | description          | status text | application_url        |
       | Scholarship To Delete | Delete this one    | Active      | https://example.com/del |
     And I am on the manage scholarships page
-    When I click "Delete" for "Scholarship To Delete" # Need a way to target the correct delete button
-    # And I accept the confirmation # How to handle confirmation?
+    When I click "Delete" for "Scholarship To Delete"
     Then I should be on the manage scholarships page
     And I should see "Scholarship was successfully destroyed."
     And I should not see "Scholarship To Delete"
 
   Scenario: Admin can export scholarships
     When I click link "Export"
-    Then I should receive a CSV file # Need specific step for this 
+    Then I should receive a CSV file 

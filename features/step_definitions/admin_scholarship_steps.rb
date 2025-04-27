@@ -92,5 +92,26 @@ Then("I should receive a CSV file") do
   expect(page.response_headers["Content-Disposition"]).to match(/attachment; filename=".*scholarships.*\.csv"/i)
 end
 
-# Note: Generic steps like "click_button", "click_link", "fill_in", "should see"
+# Step to handle login - might belong in a more general authentication steps file
+Given("I logged in as an {string}") do |role|
+  # This is a placeholder. Replace with your actual login logic.
+  # You might need to create a user, visit the login page, fill credentials, and submit.
+  # Example using FactoryBot and Capybara:
+  # user = FactoryBot.create(:user, role: role.downcase.to_sym) # Assuming role maps to a user attribute/factory trait
+  # visit login_path
+  # fill_in "Email", with: user.email
+  # fill_in "Password", with: user.password # Or a default password if using FactoryBot sequence
+  # click_button "Log in"
+  # expect(page).to have_content("Signed in successfully") # Or similar confirmation
+  puts "Warning: Placeholder step used for 'Given I logged in as an \"#{role}\"'. Implement actual login logic."
+  # For testing purposes, you might bypass UI login if you have helper methods:
+  # login_as(user)
+end
+
+# Generic step to click a link (add back if removed)
+When("I click link {string}") do |link_text|
+  click_link(link_text)
+end
+
+# Note: Generic steps like "click_button", "fill_in", "should see"
 # are assumed to be defined elsewhere (e.g., web_steps.rb).

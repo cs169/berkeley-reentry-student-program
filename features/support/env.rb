@@ -2,8 +2,8 @@
 
 require "webmock/cucumber"
 
-# Temporarily comment out WebMock to rule out interference
-# WebMock.disable_net_connect!(allow_localhost: true, allow: "127.0.0.1:9515")
+# Ensure WebMock allows local connections (including chromedriver)
+WebMock.disable_net_connect!(allow_localhost: true, allow: "127.0.0.1:9515")
 require "simplecov"
 require "simplecov_json_formatter"
 SimpleCov.start "rails"
@@ -33,9 +33,9 @@ Capybara.javascript_driver = :selenium_chrome_headless # Use headless Chrome for
 # Optional: Configure headless Chrome options if needed
 Capybara.register_driver :selenium_chrome_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--headless')
-  options.add_argument('--disable-gpu')
-  options.add_argument('--window-size=1280,800') # Example size
+  options.add_argument("--headless")
+  options.add_argument("--disable-gpu")
+  options.add_argument("--window-size=1280,800") # Example size
   # Add other options as needed, e.g., --no-sandbox if running in certain CI environments
   # For WSL, you might need --disable-dev-shm-usage or --no-sandbox
   # options.add_argument('--no-sandbox')

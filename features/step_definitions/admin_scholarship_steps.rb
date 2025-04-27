@@ -51,9 +51,8 @@ When(/^(?:|I )click "(Edit|Delete)" for "([^"]*)"$/) do |action, scholarship_nam
     if action == "Edit"
       click_link(action)
     elsif action == "Delete"
-      # Assumes you have an accept_turbo_confirm helper for Turbo Stream confirmation dialogs
-      # Define this helper in your features/support files.
-      accept_turbo_confirm do
+      # Use standard browser confirm helper. If this fails, you might need a custom Turbo helper or no confirm.
+      accept_confirm do
         click_button(action)
       end
     end
@@ -61,7 +60,7 @@ When(/^(?:|I )click "(Edit|Delete)" for "([^"]*)"$/) do |action, scholarship_nam
 end
 
 # Use path helper and check title/header
-Then(/^I should be on the edit scholarship page for "([^"]*)"$/) do |scholarship_name|
+Then(/^I should land on the edit scholarship page for "([^"]*)"$/) do |scholarship_name|
   scholarship = Scholarship.find_by!(name: scholarship_name)
   expect(page).to have_current_path(edit_scholarship_path(scholarship))
   expect(page).to have_content("Edit Scholarship") # Adjust if title is different
@@ -72,7 +71,7 @@ end
 # defined in your features/support files.
 When(/^(?:|I )fill in rich text area "([^"]*)" with "([^"]*)"$/) do |field, value|
   # Find the hidden input field associated with the rich text area.
-  hidden_input_id = "scholarship_#{field.downcase.gsub(' ', '_')}_trix_input_scholarship"
+  hidden_input_id = "scholarship_#{field.downcase.tr(' ', '_')}_trix_input_scholarship"
 
   # Use execute_script to set the value of the hidden field directly
   # This is a workaround for potential issues with Capybara finding/filling the hidden Trix input
@@ -84,7 +83,7 @@ end
 
 # Specific step to fill in Application URL by ID
 When("I fill in the Application URL field with {string}") do |value|
-  fill_in 'scholarship_application_url', with: value
+  fill_in "scholarship_application_url", with: value
 end
 
 # Updated CSV verification step

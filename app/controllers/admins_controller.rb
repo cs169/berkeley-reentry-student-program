@@ -133,11 +133,4 @@ class AdminsController < ApplicationController
   def course_params
     params.require(:course).permit(:code, :title, :description, :units, :semester, :schedule, :ccn, :location, :available)
   end
-
-  def require_admin
-    unless current_user&.admin?
-      flash[:error] = "You must be an admin to access this page."
-      redirect_to root_path
-    end
-  end
 end

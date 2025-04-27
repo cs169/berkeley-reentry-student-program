@@ -127,10 +127,27 @@ RSpec.describe "Admins", type: :request do
       expect(response).to redirect_to(manage_courses_path)
     end
 
+    it "fails to create a course with invalid data" do
+      post create_course_path, params: { course: { code: "", title: "" } }
+      expect(response).to render_template("admins/courses/new")
+    end
+
+    it "shows edit course form" do
+      course = FactoryBot.create(:course)
+      get edit_course_path(course)
+      expect(response).to have_http_status(:success)
+    end
+
     it "updates a course successfully" do
       course = FactoryBot.create(:course)
       patch update_course_path(course), params: { course: { title: "Updated Title" } }
       expect(response).to redirect_to(manage_courses_path)
+    end
+
+    it "fails to update a course with invalid data" do
+      course = FactoryBot.create(:course)
+      patch update_course_path(course), params: { course: { title: "" } }
+      expect(response).to render_template("admins/courses/edit")
     end
 
     it "deletes a course" do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # spec/system/navbar_spec.rb
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Navbar hamburger menu", type: :system do
   it "shows hamburger menu and opens it when clicked" do

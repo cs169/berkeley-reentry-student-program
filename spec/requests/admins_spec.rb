@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-#spec/requests/admins_spec.rb
+
+# spec/requests/admins_spec.rb
 
 require "rails_helper"
 
@@ -82,4 +83,72 @@ RSpec.describe "Admins", type: :request do
 
     it "updates a scholarship successfully" do
       scholarship = FactoryBot.create(:scholarship)
-      patch update_scholarship_path(scholarship), params: { scholarship: { name:
+      patch update_scholarship_path(scholarship), params: { scholarship: { name: "Updated" } }
+      expect(response).to redirect_to(manage_scholarships_path)
+    end
+
+    it "fails to update a scholarship with invalid data" do
+      scholarship = FactoryBot.create(:scholarship)
+      patch update_scholarship_path(scholarship), params: { scholarship: { name: "" } }
+      expect(response).to render_template("admins/scholarships/edit")
+    end
+
+    it "deletes a scholarship" do
+      scholarship = FactoryBot.create(:scholarship)
+      delete destroy_scholarship_path(scholarship)
+      expect(response).to redirect_to(manage_scholarships_path)
+    end
+
+    it "batch deletes scholarships" do
+      scholarships = FactoryBot.create_list(:scholarship, 3)
+      delete batch_delete_scholarships_path, params: { scholarship_ids: scholarships.map(&:id) }
+      expect(response).to redirect_to(manage_scholarships_path)
+    end
+
+    it "handles batch delete with no selection" do
+      delete batch_delete_scholarships_path
+      expect(response).to redirect_to(manage_scholarships_path)
+      follow_redirect!
+      expect(response.body).to include("No scholarships were selected for deletion.")
+    end
+
+    it "allows managing courses" do
+      get manage_courses_path
+      expect(response).to have_http_status(:success)
+    end
+
+    it "shows new course form" do
+      get new_course_path
+      expect(response).to have_http_status(:success)
+    end
+
+    it "creates a course successfully" do
+      post create_course_path, params: { course: { code: "CS101", title: "Intro to CS", description: "A course", units: 3, semester: "Fall", schedule: "MWF 10-11", ccn: "12345", location: "Room 101", available: true } }
+      expect(response).to redirect_to(manage_courses_path)
+    end
+
+    it "updates a course successfully" do
+      course = FactoryBot.create(:course)
+      patch update_course_path(course), params: { course: { title: "Updated Title" } }
+      expect(response).to redirect_to(manage_courses_path)
+    end
+
+    it "deletes a course" do
+      course = FactoryBot.create(:course)
+      delete destroy_course_path(course)
+      expect(response).to redirect_to(manage_courses_path)
+    end
+
+    it "exports courses to CSV" do
+      get export_courses_path(format: :csv)
+      expect(response).to have_http_status(:success)
+      expect(response.content_type).to eq("text/csv")
+    end
+
+    it "exports scholarships to CSV" do
+      get export_scholarships_path(format: :csv)
+      expect(response).to have_http_status(:success)
+      expect(response.content_type).to eq("text/csv")
+    end
+  end
+end

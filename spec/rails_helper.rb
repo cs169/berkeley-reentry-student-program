@@ -1,9 +1,24 @@
 # frozen_string_literal: true
 
 require "webmock/rspec"
+
+WebMock.disable_net_connect!(allow_localhost: true, allow: ['chromedriver.storage.googleapis.com', 'googlechromelabs.github.io'])
 # require 'simplecov'
 # SimpleCov.start
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+
+require "capybara/rspec"
+
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--disable-gpu')
+  options.add_argument('--window-size=1400,1400')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: [options])
+end
+
+Capybara.javascript_driver = :selenium_chrome_headless
+
 require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../config/environment", __dir__)

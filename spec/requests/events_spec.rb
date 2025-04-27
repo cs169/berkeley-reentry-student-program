@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-#spec/requests/events_spec.rb
+
+# spec/requests/events_spec.rb
 
 require "rails_helper"
 

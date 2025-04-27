@@ -51,10 +51,8 @@ When(/^(?:|I )click "(Edit|Delete)" for "([^"]*)"$/) do |action, scholarship_nam
     if action == "Edit"
       click_link(action)
     elsif action == "Delete"
-      # Use standard browser confirm helper. If this fails, you might need a custom Turbo helper or no confirm.
-      accept_confirm do
-        click_button(action)
-      end
+      # Confirmation is disabled in test env, so no need for accept_confirm
+      click_button(action)
     end
   end
 end
@@ -67,18 +65,9 @@ Then(/^I should land on the edit scholarship page for "([^"]*)"$/) do |scholarsh
 end
 
 # Step definition for filling in rich text (Trix editor)
-# Assumes you have a helper function like fill_in_rich_text_area
-# defined in your features/support files.
-When(/^(?:|I )fill in rich text area "([^"]*)" with "([^"]*)"$/) do |field, value|
-  # Find the hidden input field associated with the rich text area.
-  hidden_input_id = "scholarship_#{field.downcase.tr(' ', '_')}_trix_input_scholarship"
-
-  # Use execute_script to set the value of the hidden field directly
-  # This is a workaround for potential issues with Capybara finding/filling the hidden Trix input
-  page.execute_script("document.getElementById('#{hidden_input_id}').value = \"#{value}\";")
-
-  # Remove the placeholder warning if this works
-  # puts "Warning: Placeholder step used for 'fill in rich text area \"#{field}\"'. Implement actual logic."
+When(/^(?:|I )fill in rich text area "([^"]*)" with "([^"]*)"$/) do |locator, value|
+  # Use the ActionText helper included via features/support/action_text.rb
+  fill_in_rich_text_area locator, with: value
 end
 
 # Specific step to fill in Application URL by ID

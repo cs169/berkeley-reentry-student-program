@@ -2,7 +2,7 @@
 
 require "webmock/cucumber"
 
-# Ensure WebMock allows local connections (including chromedriver)
+# Re-enable WebMock
 WebMock.disable_net_connect!(allow_localhost: true, allow: "127.0.0.1:9515")
 require "simplecov"
 require "simplecov_json_formatter"
@@ -38,8 +38,8 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   options.add_argument("--window-size=1280,800") # Example size
   # Add other options as needed, e.g., --no-sandbox if running in certain CI environments
   # For WSL, you might need --disable-dev-shm-usage or --no-sandbox
-  # options.add_argument('--no-sandbox')
-  # options.add_argument('--disable-dev-shm-usage')
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-dev-shm-usage")
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 # --- End Capybara Configuration --- #
@@ -68,20 +68,31 @@ begin
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
+
+# --- Add Explicit DatabaseCleaner Hooks --- #
+# Ensure connection is verified before DB cleaner starts for JS tests
+# Before('@javascript') do
+#   DatabaseCleaner.strategy = :truncation
+#   ActiveRecord::Base.connection.verify!
+# end
+
+Before("not @javascript") do
+  DatabaseCleaner.strategy = :transaction
+end
+
+# It's recommended to use around hooks for DatabaseCleaner
+# but let's try simple Before/After first for diagnosis
+Before do
+  DatabaseCleaner.start
+end
+
+After do |scenario|
+  DatabaseCleaner.clean
+end
+# --- End DatabaseCleaner Hooks --- #
+
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
-#
-#   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { except: [:widgets] } may not do what you expect here
-#     # as Cucumber::Rails::Database.javascript_strategy overrides
-#     # this setting.
-#     DatabaseCleaner.strategy = :truncation
-#   end
-#
-#   Before('not @no-txn', 'not @selenium', 'not @culerity', 'not @celerity', 'not @javascript') do
-#     DatabaseCleaner.strategy = :transaction
-#   end
-#
 
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.

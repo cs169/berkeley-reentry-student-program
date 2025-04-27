@@ -5,6 +5,6 @@ FactoryBot.define do
     name { "MyString" }
     description { "MyText" }
     status_text { "MyString" }
-    application_url { "MyString" }
+    application_url { "https://example.com/apply" }
   end
 end

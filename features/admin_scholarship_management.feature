@@ -4,10 +4,10 @@ Feature: Admin Scholarship Management
   So that I can keep the scholarship information up-to-date
 
   Background: Logged in as admin and on the manage scholarships page
-    Given I logged in as an "Admin"
+    Given I logged in as a "Admin"
     And I am on the admin dashboard
     And I click "Manage Scholarships"
-    Then I should be on the manage scholarships page
+    Then I should land on the admin manage scholarships page
 
   Scenario: Admin can view the manage scholarships page
     Then I should see "Manage Scholarships"

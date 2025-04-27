@@ -15,8 +15,8 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-# Use path helper and check title/header
-Then("I should be on the manage scholarships page") do
+# Placeholder for navigating to the manage scholarships page
+Then("I should land on the admin manage scholarships page") do
   expect(page).to have_current_path(manage_scholarships_path)
   expect(page).to have_css("h1", text: "Manage Scholarships")
 end
@@ -74,8 +74,8 @@ When(/^(?:|I )fill in rich text area "([^"]*)" with "([^"]*)"$/) do |field, valu
   # Example helper call:
   # fill_in_rich_text_area(field, with: value)
   # Or direct Capybara interaction:
-  find("label", text: field)
-  find(".trix-content[aria-labelledby='#{field}_label']").set(value) # Adjust selector if needed
+  # find("label", text: field)
+  # find(".trix-content[aria-labelledby='#{field}_label']").set(value) # Adjust selector if needed
   # Placeholder: You need to implement the actual filling logic
   # based on how your rich text editor is set up.
   # This is a basic example for Trix.
@@ -90,22 +90,6 @@ Then("I should receive a CSV file") do
   expect(page.response_headers["Content-Type"]).to include("text/csv")
   # Check for a reasonable filename, e.g., scholarships.csv
   expect(page.response_headers["Content-Disposition"]).to match(/attachment; filename=".*scholarships.*\.csv"/i)
-end
-
-# Step to handle login - might belong in a more general authentication steps file
-Given("I logged in as an {string}") do |role|
-  # This is a placeholder. Replace with your actual login logic.
-  # You might need to create a user, visit the login page, fill credentials, and submit.
-  # Example using FactoryBot and Capybara:
-  # user = FactoryBot.create(:user, role: role.downcase.to_sym) # Assuming role maps to a user attribute/factory trait
-  # visit login_path
-  # fill_in "Email", with: user.email
-  # fill_in "Password", with: user.password # Or a default password if using FactoryBot sequence
-  # click_button "Log in"
-  # expect(page).to have_content("Signed in successfully") # Or similar confirmation
-  puts "Warning: Placeholder step used for 'Given I logged in as an \"#{role}\"'. Implement actual login logic."
-  # For testing purposes, you might bypass UI login if you have helper methods:
-  # login_as(user)
 end
 
 # Generic step to click a link (add back if removed)

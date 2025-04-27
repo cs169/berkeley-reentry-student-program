@@ -2,11 +2,11 @@
 
 FactoryBot.define do
   factory :event do
-    title { "MyString" }
-    date { "2025-04-03" }
-    start_time { "2025-04-03 14:54:29" }
-    end_time { "2025-04-03 14:54:29" }
-    location { "MyString" }
-    description { "MyText" }
+    title { "Sample Event" }
+    description { "An amazing event" }
+    location { "Berkeley Campus" }
+    date { Date.today + 1.week }
+    start_time { Time.parse("10:00AM") }
+    end_time { Time.parse("12:00PM") }
   end
 end

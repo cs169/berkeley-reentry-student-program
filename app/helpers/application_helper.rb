@@ -18,4 +18,10 @@ module ApplicationHelper
     Rails.logger.error "Admin model not found. Cannot perform admin check."
     false
   end
+
+  # Helper method for navbar links
+  def nav_link(name, path)
+    active = current_page?(path)
+    link_to name, path, class: "nav-link #{'active' if active}", style: "color: #{active ? 'white' : 'darkgray'};"
+  end
 end

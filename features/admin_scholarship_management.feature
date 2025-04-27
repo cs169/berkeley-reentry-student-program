@@ -21,13 +21,13 @@ Feature: Admin Scholarship Management
 
   Scenario: Admin can add a new scholarship
     When I click "Add New Scholarship"
-    Then I should be on the new scholarship page
+    Then I should land on the new scholarship page
     When I fill in "Name" with "Test Scholarship"
     And I fill in rich text area "Description" with "This is a test scholarship description."
     And I fill in "Status text" with "Active"
-    And I fill in "Application URL" with "https://example.com/apply"
+    And I fill in the Application URL field with "https://example.com/apply"
     And I click "Create Scholarship"
-    Then I should be on the manage scholarships page
+    Then I should land on the admin manage scholarships page
     And I should see "Scholarship was successfully created."
     And I should see "Test Scholarship"
 

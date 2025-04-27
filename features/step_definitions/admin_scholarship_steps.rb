@@ -22,7 +22,7 @@ Then("I should land on the admin manage scholarships page") do
 end
 
 # Use path helper and check title/header
-Then("I should be on the new scholarship page") do
+Then("I should land on the new scholarship page") do
   expect(page).to have_current_path(new_scholarship_path)
   expect(page).to have_content("New Scholarship") # Adjust if title is different
 end
@@ -71,18 +71,20 @@ end
 # Assumes you have a helper function like fill_in_rich_text_area
 # defined in your features/support files.
 When(/^(?:|I )fill in rich text area "([^"]*)" with "([^"]*)"$/) do |field, value|
-  # Example helper call:
-  # fill_in_rich_text_area(field, with: value)
-  # Or direct Capybara interaction:
-  # find("label", text: field)
-  # find(".trix-content[aria-labelledby='#{field}_label']").set(value) # Adjust selector if needed
-  # Placeholder: You need to implement the actual filling logic
-  # based on how your rich text editor is set up.
-  # This is a basic example for Trix.
-  find(:xpath, "//label[contains(text(), '#{field}')]/following-sibling::input[@type='hidden'] | //label[contains(text(), '#{field}')]/..//div[contains(@class, 'trix-content')]").set(value)
-  # The above XPath tries to find the hidden input associated with the label OR the trix-content div.
-  # You might need to adjust the selector based on your exact HTML structure.
-  puts "Warning: Placeholder step used for 'fill in rich text area \"#{field}\"'. Implement actual logic."
+  # Find the hidden input field associated with the rich text area.
+  hidden_input_id = "scholarship_#{field.downcase.gsub(' ', '_')}_trix_input_scholarship"
+
+  # Use execute_script to set the value of the hidden field directly
+  # This is a workaround for potential issues with Capybara finding/filling the hidden Trix input
+  page.execute_script("document.getElementById('#{hidden_input_id}').value = \"#{value}\";")
+
+  # Remove the placeholder warning if this works
+  # puts "Warning: Placeholder step used for 'fill in rich text area \"#{field}\"'. Implement actual logic."
+end
+
+# Specific step to fill in Application URL by ID
+When("I fill in the Application URL field with {string}") do |value|
+  fill_in 'scholarship_application_url', with: value
 end
 
 # Updated CSV verification step

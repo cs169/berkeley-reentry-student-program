@@ -2,6 +2,7 @@
 
 require "webmock/cucumber"
 
+# Re-enable WebMock
 WebMock.disable_net_connect!(allow_localhost: true, allow: "127.0.0.1:9515")
 require "simplecov"
 require "simplecov_json_formatter"
@@ -18,11 +19,30 @@ SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 require "cucumber/rails"
+require "selenium-webdriver"
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
 # Capybara.default_selector = :xpath
+
+# --- Add Capybara JavaScript Driver Configuration --- #
+Capybara.default_driver = :rack_test # Keep default as non-JS
+Capybara.javascript_driver = :selenium_chrome_headless # Use headless Chrome for JS tests
+
+# Optional: Configure headless Chrome options if needed
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument("--headless")
+  options.add_argument("--disable-gpu")
+  options.add_argument("--window-size=1280,800") # Example size
+  # Add other options as needed, e.g., --no-sandbox if running in certain CI environments
+  # For WSL, you might need --disable-dev-shm-usage or --no-sandbox
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-dev-shm-usage")
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+# --- End Capybara Configuration --- #
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how
@@ -48,25 +68,41 @@ begin
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
+
+# --- Add Explicit DatabaseCleaner Hooks --- #
+# Ensure connection is verified before DB cleaner starts for JS tests
+# Before('@javascript') do
+#   DatabaseCleaner.strategy = :truncation
+#   ActiveRecord::Base.connection.verify!
+# end
+
+Before("not @javascript") do
+  DatabaseCleaner.strategy = :transaction
+end
+
+# It's recommended to use around hooks for DatabaseCleaner
+# but let's try simple Before/After first for diagnosis
+Before do
+  DatabaseCleaner.start
+end
+
+After do |scenario|
+  DatabaseCleaner.clean
+end
+# --- End DatabaseCleaner Hooks --- #
+
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
-#
-#   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { except: [:widgets] } may not do what you expect here
-#     # as Cucumber::Rails::Database.javascript_strategy overrides
-#     # this setting.
-#     DatabaseCleaner.strategy = :truncation
-#   end
-#
-#   Before('not @no-txn', 'not @selenium', 'not @culerity', 'not @celerity', 'not @javascript') do
-#     DatabaseCleaner.strategy = :transaction
-#   end
-#
 
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
+Cucumber::Rails::Database.javascript_strategy = :truncation # Restore original strategy
+
+# Add a hook to verify the connection for JS tests
+# Before('@javascript') do
+#   ActiveRecord::Base.connection.verify!
+# end
 
 World(FactoryBot::Syntax::Methods)
 

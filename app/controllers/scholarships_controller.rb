@@ -41,8 +41,8 @@ class ScholarshipsController < ApplicationController
     @scholarship = Scholarship.new(scholarship_params)
     if @scholarship.save
       flash[:notice] = "Scholarship created successfully."
-      # Redirect to the scholarships list page
-      redirect_to scholarships_path # Was admin_scholarships_path
+      # Redirect to the admin manage scholarships page
+      redirect_to manage_scholarships_path
     else
       flash.now[:alert] = "Failed to create scholarship."
       render :new, status: :unprocessable_entity

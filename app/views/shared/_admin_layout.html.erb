@@ -1,0 +1,40 @@
+<div class="container" role="main">
+  <!-- Flash messages at the top center -->
+  <%= render "shared/flash_messages" %>
+
+  <!-- Main title -->
+  <h1 class="admin-header"><%= title %></h1>
+
+  <!-- Export button at top left if available -->
+  <% if defined?(export_path) && export_path.present? %>
+    <div>
+      <%= link_to "Export", export_path, class: "export-button" %>
+    </div>
+  <% end %>
+
+  <!-- Main content (typically a data table) -->
+  <div class="admin-table-container">
+    <%= yield :table %>
+  </div>
+
+  <!-- Bottom buttons with back on left, add new on right -->
+  <div class="admin-buttons-container">
+    <div class="back-button-container">
+      <%= link_to back_path, class: "btn btn-back" do %>
+        Back to Admin Dashboard
+      <% end %>
+    </div>
+    
+    <div class="add-button-container">
+      <% if defined?(add_new_path) && add_new_path.present? %>
+        <%= link_to add_new_path, class: "btn btn-add" do %>
+          <%= add_new_text %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if content_for?(:scripts) %>
+  <%= yield :scripts %>
+<% end %> 

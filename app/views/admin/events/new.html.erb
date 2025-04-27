@@ -13,7 +13,7 @@
 <% end %>
 
 <div class="container mt-3">
-  <%= form_with model: @event, url: admin_events_path, method: :post, local: true do |form| %>
+  <%= form_with model: @event, url: admin_events_path, method: :post, local: true, html: { multipart: true, id: "event-form" } do |form| %>
     <div class="mb-3">
       <%= form.label :title, class: 'form-label' %>
       <%= form.text_field :title, class: 'form-control' %>
@@ -27,11 +27,12 @@
     <div class="mb-3 form-group row">
       <div class="col-md-6">
         <%= form.label :start_time %>
-        <%= form.time_field :start_time, class: 'form-control' %>
+        <%= form.time_field :start_time, class: 'form-control', id: 'start-time' %>
       </div>
       <div class="col-md-6">
         <%= form.label :end_time %>
-        <%= form.time_field :end_time, class: 'form-control' %>
+        <%= form.time_field :end_time, class: 'form-control', id: 'end-time' %>
+        <div class="invalid-feedback" id="time-error">End time must be after start time</div>
       </div>
     </div>
   
@@ -57,5 +58,38 @@
   <% end %>
 </div>
 <%= link_to 'Back to Events', admin_events_path, class: 'btn btn-secondary btn-lg d-block mx-auto mb-5' %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('event-form');
+    const startTime = document.getElementById('start-time');
+    const endTime = document.getElementById('end-time');
+    const timeError = document.getElementById('time-error');
+    
+    form.addEventListener('submit', function(e) {
+      // Only validate if both times are provided
+      if (startTime.value && endTime.value) {
+        if (endTime.value <= startTime.value) {
+          e.preventDefault();
+          endTime.classList.add('is-invalid');
+          timeError.style.display = 'block';
+        } else {
+          endTime.classList.remove('is-invalid');
+          timeError.style.display = 'none';
+        }
+      }
+    });
+    
+    endTime.addEventListener('input', function() {
+      if (this.value && startTime.value && this.value <= startTime.value) {
+        this.classList.add('is-invalid');
+        timeError.style.display = 'block';
+      } else {
+        this.classList.remove('is-invalid');
+        timeError.style.display = 'none';
+      }
+    });
+  });
+</script>
 
 

@@ -71,6 +71,7 @@ RSpec.describe "Admins", type: :request do
     end
 
     it "fails to create a scholarship with invalid data" do
+      allow_any_instance_of(Scholarship).to receive(:save).and_return(false)
       post create_scholarship_path, params: { scholarship: { name: "" } }
       expect(response).to render_template("admins/scholarships/new")
     end

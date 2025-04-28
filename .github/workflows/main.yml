@@ -48,15 +48,9 @@ jobs:
       run: |
         npm install -g yarn
 
-    - name: Setup ActionText and ActiveStorage
-      run: |
-        bundle exec rails action_text:install
-        bundle exec rake assets:precompile
-
     - name: setup the database
       run: |
-        bundle exec rake db:create RAILS_ENV=test
-        bundle exec rake db:schema:load RAILS_ENV=test
+        bundle exec rake db:create db:migrate
 
     - name: run Cucumber tests #and capture coverage
       run: |

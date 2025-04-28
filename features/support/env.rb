@@ -6,7 +6,7 @@ require "webmock/cucumber"
 WebMock.disable_net_connect!(allow_localhost: true, allow: "127.0.0.1:9515")
 require "simplecov"
 require "simplecov_json_formatter"
-#SimpleCov.start "rails"
+SimpleCov.start "rails"
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
                                                                   SimpleCov::Formatter::JSONFormatter,
                                                                   SimpleCov::Formatter::HTMLFormatter

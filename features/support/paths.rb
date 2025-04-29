@@ -23,6 +23,11 @@ module NavigationHelpers
     when /^the scholarships page$/ then scholarships_path
     when /^the courses page$/ then courses_path
     when /^the podcast page$/ then podcasts_path
+    when /^the admin manage scholarships page$/ then admin_scholarships_path
+    when /^the new scholarship page$/ then new_admin_scholarship_path
+    when /^the edit scholarship page for "([^"]*)"$/
+      scholarship = Scholarship.find_by(name: Regexp.last_match(1))
+      edit_scholarship_path(scholarship)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

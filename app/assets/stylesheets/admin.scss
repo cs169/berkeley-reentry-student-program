@@ -1,0 +1,156 @@
+// Admin UI Styles
+
+// Berkeley colors
+$berkeley-blue: #003262;
+$berkeley-gold: #FDB515;
+$success-green: #76b852;
+$danger-red: #dc3545;
+$neutral-gray: #6c757d;
+
+// Typography
+.admin-header {
+  color: $berkeley-blue;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+// Flash messages
+.flash-message {
+  background-color: $success-green;
+  color: white;
+  text-align: center;
+  padding: 0.75rem;
+  margin-bottom: 2rem;
+  border-radius: 4px;
+  
+  &.error {
+    background-color: $danger-red;
+  }
+}
+
+// Button positioning
+.admin-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  width: 100%;
+  
+  .back-button-container {
+    flex: 0 0 auto;
+  }
+  
+  .add-button-container {
+    flex: 0 0 auto;
+  }
+  
+  .btn-back {
+    background-color: #f8f9fa;
+    border-color: #dc3545;
+    color: #dc3545;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    
+    &:hover {
+      background-color: #f8f9fa;
+      border-color: darken(#dc3545, 10%);
+      color: darken(#dc3545, 10%);
+    }
+  }
+  
+  .btn-add {
+    background-color: #198754;
+    border-color: #198754;
+    color: white;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    
+    &:hover {
+      background-color: darken(#198754, 10%);
+      border-color: darken(#198754, 10%);
+    }
+  }
+}
+
+// Export button
+.export-button {
+  background-color: #6c757d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-bottom: 1rem;
+  display: inline-block;
+  
+  &:hover {
+    background-color: darken(#6c757d, 10%);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+// Data tables styling
+.admin-table-container {
+  width: 100%;
+  margin-bottom: 1rem;
+  
+  .dataTables_wrapper {
+    .dataTables_length, .dataTables_filter {
+      margin-bottom: 1rem;
+    }
+    
+    .dataTables_info, .dataTables_paginate {
+      margin-top: 1rem;
+    }
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    th {
+      text-align: left;
+      padding: 0.5rem;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .action-column {
+      text-align: center;
+      
+      .btn-edit {
+        background-color: #0d6efd;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        display: inline-block;
+        margin-right: 0.25rem;
+      }
+      
+      .btn-delete {
+        background-color: #dc3545;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+// Card styling for table container
+.admin-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+} 

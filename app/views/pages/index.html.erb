@@ -17,6 +17,11 @@
             <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Canvas sign-in" src="https://www.instructure.com/sites/default/files/image/2021-12/Canvas_logo_single_mark.png" />
             Login with Canvas
             <% end %>
+            <% if ENV["MOCK_CANVAS_LOGIN"] == "true" %>
+                <%= link_to "👑 Mock Admin Login", canvas_callback_path(mock_role: "admin"), class: "btn btn-secondary btn-lg" %>
+
+                <%= link_to "🎓 Mock Student Login", canvas_callback_path(mock_role: "student"), class: "btn btn-secondary btn-lg" %>
+            <% end %>
         </div>
         <% else %>
         <h1 class="display-5 fw-bold">Welcome to the Berkeley <br /> Re-entry Student Program,</h1>

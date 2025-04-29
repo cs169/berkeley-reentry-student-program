@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   get "appointments", to: "appointments#advisors"
   # scholarships page
   get "scholarships/new", to: "admins#new", as: :new_scholarship
+  get "scholarships/export", to: "admins#export_scholarships", as: "export_scholarships"
   get "scholarships", to: "scholarships#index"
   get "scholarships/:id", to: "scholarships#show", as: :scholarship
-  get "edit_scholarships", to: "admins#edit_scholarships"
+  get "manage_scholarships", to: "admins#manage_scholarships", as: "manage_scholarships"
   post "scholarships", to: "admins#create", as: :create_scholarship
   get "scholarships/:id/edit", to: "admins#edit", as: :edit_scholarship
   patch "scholarships/:id", to: "admins#update", as: :update_scholarship
@@ -62,6 +63,14 @@ Rails.application.routes.draw do
   get "user/profile/new", to: "users#profile_new", as: "user_profile_new"
   patch "user/profile/update", to: "users#profile_update", as: "user_profile_update"
   get "user/profile/edit", to: "users#profile_edit", as: "user_profile_edit"
+  get "manage_user_roles", to: "admins#manage_user_roles", as: "manage_user_roles"
+  get "user/:id/role_edit", to: "users#edit_user_role", as: "edit_user_role"
+
+  resources :users do
+    member do
+      patch :update_user_role
+    end
+  end
 
   # Routes for Google authentication
   get "auth/google_oauth2/callback", to: "sessions#google_auth", as: "google_login"
@@ -72,4 +81,9 @@ Rails.application.routes.draw do
   # Routes for Canvas authentication
   post "login/canvas", to: "login#canvas_login", as: "canvas_login"
   get "auth/canvas/callback", to: "sessions#canvas_callback", as: "canvas_callback"
+
+  if Rails.env.test?
+    # Route for test helper sign_in_as
+    post "/__test_login", to: "sessions#create_for_test"
+  end
 end

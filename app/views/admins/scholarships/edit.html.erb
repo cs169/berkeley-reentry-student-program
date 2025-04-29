@@ -1,10 +1,59 @@
-<div class="container">
-  <div class="<%=flash.empty? ? 'px-4 py-5 my-2' : 'px-4 pb-5 mb-5' %> text-center">
-    <%= render "shared/flash_messages" %>
-    <h1 class="display-5 fw-bold">Edit Scholarship</h1>
-
-    <%= render 'admins/scholarships/form', scholarship: @scholarship %>
-
-    <%= link_to "Back to Scholarships", edit_scholarships_path, class: "btn btn-secondary mt-3" %>
+<html lang="en">
+<head>
+  <%= stylesheet_link_tag 'https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css' %>
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js' %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <style>
+    trix-editor {
+      min-height: 200px !important;
+      border: 1px solid #ced4da !important;
+      border-radius: 0.25rem !important;
+      padding: 0.5rem !important;
+    }
+    
+    trix-editor:focus {
+      outline: none !important;
+      border-color: #86b7fe !important;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="<%=flash.empty? ? 'px-4 py-5 my-2' : 'px-4 pb-5 mb-5' %> text-center">
+      <%= render "shared/flash_messages" %>
+    </div>
+    <h1 class="display-5 fw-bold text-center" style="color: #003262">Edit Scholarship</h1>
+    
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <%= render 'admins/scholarships/form', scholarship: @scholarship %>
+          </div>
+        </div>
+        
+        <div class="d-flex justify-content-center mt-4 mb-3">
+          <%= link_to "Back to Scholarships", manage_scholarships_path, class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
   </div>
-</div> 
+  
+  <script>
+    // Ensure Trix editor is properly initialized after DOM loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof Trix !== 'undefined') {
+        console.log('Trix loaded');
+      } else {
+        console.log('Trix not loaded, attempting to load');
+        var script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js';
+        document.head.appendChild(script);
+      }
+    });
+  </script>
+</body>
+</html> 

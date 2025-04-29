@@ -3,27 +3,26 @@
 # handle all access from admin user
 class AdminsController < ApplicationController
   before_action :check_permission
+  before_action :set_scholarship, only: %i[edit update destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :scholarship_not_found
 
   def index; end
 
   def view_checkin_records
-    if (!params.key? :page) || (params[:page].to_i < 1)
-      redirect_to view_checkin_records_path(page: 1)
-      # return is needed here, otherwise the app will continue execute
-      # the following instructions after redirect
-      return
-    end
-    n = params[:page].to_i - 1
-    @checkin_records = Checkin.get_20_checkin_records(n)
-    @has_next_page = @checkin_records.size == 20
+    @checkin_records = Checkin.all
   end
 
   def manage_advisors
     @advisors = Advisor.all
   end
 
-  def edit_scholarships
+  def manage_scholarships
     @scholarships = Scholarship.all
+    render "admins/scholarships/manage"
+  end
+
+  def manage_user_roles
+    @users = User.all
   end
 
   def new
@@ -34,39 +33,38 @@ class AdminsController < ApplicationController
   def create
     @scholarship = Scholarship.new(scholarship_params)
     if @scholarship.save
-      redirect_to edit_scholarships_path, notice: "Scholarship was successfully created."
+      redirect_to manage_scholarships_path, notice: "Scholarship was successfully created."
     else
-      render "admins/scholarships/new"
+      flash.now[:alert] = "Failed to create scholarship."
+      render "admins/scholarships/new", status: :unprocessable_entity
     end
   end
 
   def edit
-    @scholarship = Scholarship.find(params[:id])
     render "admins/scholarships/edit"
   end
 
   def update
-    @scholarship = Scholarship.find(params[:id])
     if @scholarship.update(scholarship_params)
-      redirect_to edit_scholarships_path, notice: "Scholarship was successfully updated."
+      redirect_to manage_scholarships_path, notice: "Scholarship was successfully updated."
     else
-      render "admins/scholarships/edit"
+      flash.now[:alert] = "Failed to update scholarship."
+      render "admins/scholarships/edit", status: :unprocessable_entity
     end
   end
 
   def destroy
-    @scholarship = Scholarship.find(params[:id])
     @scholarship.destroy
-    redirect_to edit_scholarships_path, notice: "Scholarship was successfully deleted."
+    redirect_to manage_scholarships_path, notice: "Scholarship was successfully deleted."
   end
 
   def batch_delete
     scholarship_ids = params[:scholarship_ids]
     if scholarship_ids.present?
       Scholarship.where(id: scholarship_ids).destroy_all
-      redirect_to edit_scholarships_path, notice: "Selected scholarships were successfully deleted."
+      redirect_to manage_scholarships_path, notice: "Selected scholarships were successfully deleted."
     else
-      redirect_to edit_scholarships_path, alert: "No scholarships were selected for deletion."
+      redirect_to manage_scholarships_path, alert: "No scholarships were selected for deletion."
     end
   end
 
@@ -116,10 +114,25 @@ class AdminsController < ApplicationController
     end
   end
 
+  def export_scholarships
+    @scholarships = Scholarship.all
+    respond_to do |format|
+      format.csv { send_data Scholarship.to_csv, filename: "scholarships-#{Date.today}.csv" }
+    end
+  end
+
   private
   def check_permission
     admin = Admin.find_by_id(session[:current_user_id])
     redirect_to root_path, flash: { error: "You don't have the permission to do that!" } if !admin || !admin.is_admin
+  end
+
+  def set_scholarship
+    @scholarship = Scholarship.find(params[:id])
+  end
+
+  def scholarship_not_found
+    redirect_to scholarships_path, alert: "Scholarship not found."
   end
 
   def scholarship_params
@@ -128,12 +141,5 @@ class AdminsController < ApplicationController
 
   def course_params
     params.require(:course).permit(:code, :title, :description, :units, :semester, :schedule, :ccn, :location, :available)
-  end
-
-  def require_admin
-    unless current_user&.admin?
-      flash[:error] = "You must be an admin to access this page."
-      redirect_to root_path
-    end
   end
 end

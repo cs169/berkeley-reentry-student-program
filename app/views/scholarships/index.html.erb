@@ -12,13 +12,23 @@
   </div>
 <br></br>
 
+<%# Remove filtering - iterate over all scholarships %>
+<%# published_scholarships = @scholarships %>
+
+<%# Remove conditional check here %>
+<%# if published_scholarships.empty? %>
+<%#  <div class=\"row\"> %>
+<%#    <p>There are currently no scholarships available.</p> %>
+<%#  </div> %>
+<%# else %>
+  <%# Iterate over all scholarships %>
   <% @scholarships.each do |scholarship| %>
     <div class="row mb-4"> <%# Add margin-bottom for spacing between scholarships %>
       <div class="card">
         <h3 class="card-header"><%= scholarship.name %></h3>
         <div class="card-body">
           <div class="card-text">
-            <%= simple_format(scholarship.description) %>
+            <%= scholarship.description %>
 
             <%# Display the status text and link %>
             <% if scholarship.application_url.present? %>
@@ -34,12 +44,14 @@
       </div>
     </div>
   <% end %>
+<%# end %>
 
-  <% if @scholarships.empty? %>
-    <div class="row">
-      <p>There are currently no scholarships listed.</p>
-    </div>
-  <% end %>
+<%# Add the empty check after the loop %>
+<% if @scholarships.empty? %>
+  <div class="row">
+    <p>There are currently no scholarships available.</p> <%# Message when controller provides no scholarships %>
+  </div>
+<% end %>
 
 </div>
 <hr class="col mt-5 mx-auto"/>

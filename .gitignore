@@ -52,3 +52,7 @@
 .vs/
 .vs
 .vscode
+
+/config/credentials.yml.enc
+/config/credentials.yml.enc.bak
+/config/credentials/

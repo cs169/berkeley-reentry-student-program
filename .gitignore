@@ -53,4 +53,6 @@
 .vs
 .vscode
 
-/config/credentials/test.key
+/config/credentials.yml.enc
+/config/credentials.yml.enc.bak
+/config/credentials/

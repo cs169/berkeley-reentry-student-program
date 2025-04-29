@@ -3,6 +3,8 @@
 # handle all access from admin user
 class AdminsController < ApplicationController
   before_action :check_permission
+  before_action :set_scholarship, only: %i[edit update destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :scholarship_not_found
 
   def index; end
 
@@ -33,26 +35,25 @@ class AdminsController < ApplicationController
     if @scholarship.save
       redirect_to manage_scholarships_path, notice: "Scholarship was successfully created."
     else
-      render "admins/scholarships/new"
+      flash.now[:alert] = "Failed to create scholarship."
+      render "admins/scholarships/new", status: :unprocessable_entity
     end
   end
 
   def edit
-    @scholarship = Scholarship.find(params[:id])
     render "admins/scholarships/edit"
   end
 
   def update
-    @scholarship = Scholarship.find(params[:id])
     if @scholarship.update(scholarship_params)
       redirect_to manage_scholarships_path, notice: "Scholarship was successfully updated."
     else
-      render "admins/scholarships/edit"
+      flash.now[:alert] = "Failed to update scholarship."
+      render "admins/scholarships/edit", status: :unprocessable_entity
     end
   end
 
   def destroy
-    @scholarship = Scholarship.find(params[:id])
     @scholarship.destroy
     redirect_to manage_scholarships_path, notice: "Scholarship was successfully deleted."
   end
@@ -124,6 +125,14 @@ class AdminsController < ApplicationController
   def check_permission
     admin = Admin.find_by_id(session[:current_user_id])
     redirect_to root_path, flash: { error: "You don't have the permission to do that!" } if !admin || !admin.is_admin
+  end
+
+  def set_scholarship
+    @scholarship = Scholarship.find(params[:id])
+  end
+
+  def scholarship_not_found
+    redirect_to scholarships_path, alert: "Scholarship not found."
   end
 
   def scholarship_params

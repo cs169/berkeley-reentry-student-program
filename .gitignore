@@ -52,3 +52,5 @@
 .vs/
 .vs
 .vscode
+
+/config/credentials/test.key

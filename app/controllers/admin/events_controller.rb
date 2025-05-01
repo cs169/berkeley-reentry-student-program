@@ -19,7 +19,7 @@ class Admin::EventsController < ApplicationController
       redirect_to admin_events_path, flash: { success: "Event created successfully." }
     else
       flash.now[:alert] = "Missing values. Failed to create event."
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +39,7 @@ class Admin::EventsController < ApplicationController
       redirect_to admin_events_path, flash: { success: "Event updated successfully." }
     else
       flash.now[:alert] = "Failed to update event."
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

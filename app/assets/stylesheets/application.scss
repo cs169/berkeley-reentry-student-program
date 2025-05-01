@@ -237,3 +237,13 @@ ul.dropdown-menu li {
 .berkeley-color {
   background-color: #003262;
 }
+
+.field-error {
+  border: 2px solid red;
+}
+
+.field-error-message {
+  color: red;
+  margin-top: 5px;
+  font-size: 13px; 
+}

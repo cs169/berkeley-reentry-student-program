@@ -3,7 +3,7 @@
 
 class Event < ApplicationRecord
   has_one_attached :flyer
-  validates :title, :date, :start_time, :location, :description, presence: true
+  validates :title, :date, :start_time, :location, :description, presence: { message: "%{attribute} cannot be empty" }
   validate :acceptable_flyer
   validate :end_time_after_start_time, if: -> { start_time.present? && end_time.present? }
 
@@ -24,8 +24,11 @@ class Event < ApplicationRecord
   def self.to_csv
     require "csv"
     CSV.generate(headers: true) do |csv|
-      csv << column_names
-      all.each { |event| csv << event.attributes.values_at(*column_names) }
+      columns = %w[title date start_time end_time location description]
+      csv << columns
+      all.order(date: :desc).each do |event|
+        csv << event.attributes.values_at(*columns)
+      end
     end
   end
 

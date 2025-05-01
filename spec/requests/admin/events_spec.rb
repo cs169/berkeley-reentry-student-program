@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "Admin::Events", type: :request do
@@ -75,7 +76,7 @@ RSpec.describe "Admin::Events", type: :request do
     context "when the event is successfully deleted" do
       it "deletes the event and redirects" do
         expect {
-            delete admin_event_path(deletable_event)
+          delete admin_event_path(deletable_event)
         }.to change(Event, :count).by(-1)
         expect(response).to redirect_to(admin_events_path)
       end

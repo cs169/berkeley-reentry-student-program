@@ -3,7 +3,7 @@
 
 class Event < ApplicationRecord
   has_one_attached :flyer
-  validates :title, :date, :start_time, :location, :description, presence: {message: "%{attribute} cannot be empty"}
+  validates :title, :date, :start_time, :location, :description, presence: { message: "%{attribute} cannot be empty" }
   validate :acceptable_flyer
   validate :end_time_after_start_time, if: -> { start_time.present? && end_time.present? }
 

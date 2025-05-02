@@ -36,7 +36,7 @@ Then("the start time field should show {string}") do |expected_time|
   start_time_value = find_field("start-time").value
   expect(start_time_value).to include(expected_time)
 end
-  
+
 Then("the end time field should show {string}") do |expected_time|
   end_time_value = find_field("end-time").value
   expect(end_time_value).to include(expected_time)

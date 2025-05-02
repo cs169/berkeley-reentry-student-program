@@ -97,7 +97,7 @@ Feature: Admin Event Management
     And I should not see "Test Event"
 
   Scenario: Admin can export all events as CSV
-    Given the following event exists":
+    Given the following event exists:
       | title        | start_time          | end_time            | date       | location | description   |
       | Test Event   | 2025-05-01 14:00:00 | 2025-05-01 15:00:00 | 2025-05-01 | Hall A   | Description.  |
     And I visit the admin events page
